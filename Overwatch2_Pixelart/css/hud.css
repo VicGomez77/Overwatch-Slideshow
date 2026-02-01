@@ -1,6 +1,4 @@
-/* ============================================
-   ESTILOS ESPECÍFICOS PANTALLA DE CONFIGURACIÓN HUD
-   ============================================ */
+/* ESTILOS ESPECÍFICOS PANTALLA DE CONFIGURACIÓN HUD*/
 
 .hud-page {
     background-color: var(--ow-black);
@@ -713,4 +711,5 @@
 .cancel-btn:hover {
     background-color: var(--ow-light-gray);
     color: var(--ow-black);
+}
 }
