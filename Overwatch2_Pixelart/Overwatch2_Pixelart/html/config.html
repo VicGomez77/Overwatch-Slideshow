@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración - Overwatch 2 Pixel</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/config.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="config-page">
+    <div class="config-container">
+        <!-- Encabezado -->
+        <div class="config-header">
+            <h1 class="config-title">CONFIGURACIÓN DEL JUEGO</h1>
+            <p class="config-subtitle">Ajusta los parámetros gráficos, de sonido y controles</p>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="config-main">
+            <!-- Panel de navegación de categorías -->
+            <div class="config-categories">
+                <div class="category-item active" data-category="graphics">
+                    <span class="category-icon">🖥️</span>
+                    <span class="category-name">GRÁFICOS</span>
+                </div>
+                
+                <div class="category-item" data-category="audio">
+                    <span class="category-icon">🔊</span>
+                    <span class="category-name">AUDIO</span>
+                </div>
+                
+                <div class="category-item" data-category="controls">
+                    <span class="category-icon">🎮</span>
+                    <span class="category-name">CONTROLES</span>
+                </div>
+                
+                <div class="category-item" data-category="gameplay">
+                    <span class="category-icon">⚙️</span>
+                    <span class="category-name">GAMEPLAY</span>
+                </div>
+                
+                <div class="category-item" data-category="interface">
+                    <span class="category-icon">👁️</span>
+                    <span class="category-name">INTERFAZ</span>
+                </div>
+            </div>
+
+            <!-- Panel de configuración -->
+            <div class="config-panel">
+                <!-- Categoría Gráficos -->
+                <div class="config-category active" id="graphics-category">
+                    <div class="category-header">
+                        <h2 class="category-title">CONFIGURACIÓN GRÁFICA</h2>
+                        <p class="category-description">Ajusta la calidad visual y rendimiento</p>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <!-- Resolución -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">RESOLUCIÓN</h3>
+                                <div class="setting-value" id="resolution-value">1920x1080</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="resolution-options">
+                                    <button class="resolution-option" data-resolution="1280x720">1280x720</button>
+                                    <button class="resolution-option" data-resolution="1366x768">1366x768</button>
+                                    <button class="resolution-option active" data-resolution="1920x1080">1920x1080</button>
+                                    <button class="resolution-option" data-resolution="2560x1440">2560x1440</button>
+                                    <button class="resolution-option" data-resolution="3840x2160">3840x2160</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Calidad Gráfica -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">CALIDAD GRÁFICA</h3>
+                                <div class="setting-value" id="quality-value">Alta</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="range" min="1" max="5" value="4" class="pixel-slider" id="quality-slider">
+                                <div class="slider-labels">
+                                    <span>Muy Baja</span>
+                                    <span>Baja</span>
+                                    <span>Media</span>
+                                    <span>Alta</span>
+                                    <span>Ultra</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tasa de refresco -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">TASA DE REFRESCO (FPS)</h3>
+                                <div class="setting-value" id="fps-value">144</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="fps-options">
+                                    <button class="fps-option" data-fps="60">60 FPS</button>
+                                    <button class="fps-option" data-fps="75">75 FPS</button>
+                                    <button class="fps-option" data-fps="120">120 FPS</button>
+                                    <button class="fps-option active" data-fps="144">144 FPS</button>
+                                    <button class="fps-option" data-fps="240">240 FPS</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Efectos de partículas -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">EFECTOS DE PARTÍCULAS</h3>
+                                <div class="setting-value" id="particles-value">75%</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="range" min="0" max="100" value="75" class="pixel-slider" id="particles-slider">
+                                <div class="slider-range">
+                                    <span>0%</span>
+                                    <span>100%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sombreado -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">SOMBREADO</h3>
+                                <div class="setting-value" id="shadows-value">Activado</div>
+                            </div>
+                            <div class="setting-control">
+                                <label class="toggle-switch">
+                                    <input type="checkbox" id="shadows-toggle" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vista previa gráfica -->
+                    <div class="graphics-preview">
+                        <h3 class="preview-title">VISTA PREVIA</h3>
+                        <div class="preview-container">
+                            <div class="preview-image" id="graphics-preview">
+                                <div class="preview-overlay">
+                                    <div class="preview-info">
+                                        <div class="info-item">
+                                            <span class="info-label">Resolución:</span>
+                                            <span class="info-value" id="preview-resolution">1920x1080</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">Calidad:</span>
+                                            <span class="info-value" id="preview-quality">Alta</span>
+                                        </div>
+                                        <div class="info-item">
+                                            <span class="info-label">FPS:</span>
+                                            <span class="info-value" id="preview-fps">144</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoría Audio -->
+                <div class="config-category" id="audio-category">
+                    <div class="category-header">
+                        <h2 class="category-title">CONFIGURACIÓN DE AUDIO</h2>
+                        <p class="category-description">Ajusta el volumen y efectos de sonido</p>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <!-- Volumen general -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">VOLUMEN GENERAL</h3>
+                                <div class="setting-value" id="master-volume-value">80%</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="range" min="0" max="100" value="80" class="pixel-slider" id="master-volume-slider">
+                                <div class="volume-test">
+                                    <button class="test-btn" id="test-master-volume">🔊 PROBAR</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Efectos de sonido -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">EFECTOS DE SONIDO</h3>
+                                <div class="setting-value" id="sfx-volume-value">90%</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="range" min="0" max="100" value="90" class="pixel-slider" id="sfx-volume-slider">
+                                <div class="volume-test">
+                                    <button class="test-btn" id="test-sfx-volume">🎮 PROBAR</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Música -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">MÚSICA</h3>
+                                <div class="setting-value" id="music-volume-value">70%</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="range" min="0" max="100" value="70" class="pixel-slider" id="music-volume-slider">
+                                <div class="volume-test">
+                                    <button class="test-btn" id="test-music-volume">🎵 PROBAR</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Voz -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">VOZ / COMUNICACIÓN</h3>
+                                <div class="setting-value" id="voice-volume-value">100%</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="range" min="0" max="100" value="100" class="pixel-slider" id="voice-volume-slider">
+                                <div class="volume-test">
+                                    <button class="test-btn" id="test-voice-volume">🎤 PROBAR</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Configuración avanzada de audio -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">CONFIGURACIÓN AVANZADA</h3>
+                            </div>
+                            <div class="setting-control advanced-audio">
+                                <div class="checkbox-group">
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="surround-toggle" checked>
+                                        <span class="pixel-checkbox"></span>
+                                        Sonido Surround 7.1
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="reverb-toggle">
+                                        <span class="pixel-checkbox"></span>
+                                        Reverb ambiental
+                                    </label>
+                                    <label class="checkbox-label">
+                                        <input type="checkbox" id="hrtf-toggle" checked>
+                                        <span class="pixel-checkbox"></span>
+                                        HRTF (Audio 3D)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vista previa de audio -->
+                    <div class="audio-preview">
+                        <h3 class="preview-title">VISTA PREVIA DE AUDIO</h3>
+                        <div class="preview-container">
+                            <div class="audio-visualizer" id="audio-visualizer">
+                                <div class="visualizer-bars">
+                                    <div class="bar" style="height: 60%"></div>
+                                    <div class="bar" style="height: 80%"></div>
+                                    <div class="bar" style="height: 40%"></div>
+                                    <div class="bar" style="height: 90%"></div>
+                                    <div class="bar" style="height: 30%"></div>
+                                    <div class="bar" style="height: 70%"></div>
+                                    <div class="bar" style="height: 50%"></div>
+                                    <div class="bar" style="height: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="audio-info">
+                                <div class="info-item">
+                                    <span class="info-label">Volumen General:</span>
+                                    <span class="info-value" id="audio-preview-master">80%</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">SFX:</span>
+                                    <span class="info-value" id="audio-preview-sfx">90%</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Música:</span>
+                                    <span class="info-value" id="audio-preview-music">70%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categoría Controles -->
+                <div class="config-category" id="controls-category">
+                    <div class="category-header">
+                        <h2 class="category-title">CONFIGURACIÓN DE CONTROLES</h2>
+                        <p class="category-description">Personaliza los controles del juego</p>
+                    </div>
+                    
+                    <div class="settings-group">
+                        <!-- Sensibilidad del ratón -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">SENSIBILIDAD DEL RATÓN</h3>
+                                <div class="setting-value" id="sensitivity-value">15.00</div>
+                            </div>
+                            <div class="setting-control">
+                                <input type="range" min="1" max="30" step="0.1" value="15" class="pixel-slider" id="sensitivity-slider">
+                                <div class="slider-range">
+                                    <span>Baja</span>
+                                    <span>Alta</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Tasa de refresco del ratón -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">TASA DE REFRESCO DEL RATÓN</h3>
+                                <div class="setting-value" id="polling-rate-value">1000 Hz</div>
+                            </div>
+                            <div class="setting-control">
+                                <div class="polling-options">
+                                    <button class="polling-option" data-rate="125">125 Hz</button>
+                                    <button class="polling-option" data-rate="250">250 Hz</button>
+                                    <button class="polling-option" data-rate="500">500 Hz</button>
+                                    <button class="polling-option active" data-rate="1000">1000 Hz</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Asignación de teclas -->
+                        <div class="setting-item">
+                            <div class="setting-header">
+                                <h3 class="setting-name">ASIGNACIÓN DE TECLAS</h3>
+                            </div>
+                            <div class="setting-control keybindings">
+                                <div class="keybinding-item">
+                                    <span class="key-action">Movimiento Adelante</span>
+                                    <button class="key-button" data-action="forward">W</button>
+                                </div>
+                                <div class="keybinding-item">
+                                    <span class="key-action">Movimiento Atrás</span>
+                                    <button class="key-button" data-action="backward">S</button>
+                                </div>
+                                <div class="keybinding-item">
+                                    <span class="key-action">Movimiento Izquierda</span>
+                                    <button class="key-button" data-action="left">A</button>
+                                </div>
+                                <div class="keybinding-item">
+                                    <span class="key-action">Movimiento Derecha</span>
+                                    <button class="key-button" data-action="right">D</button>
+                                </div>
+                                <div class="keybinding-item">
+                                    <span class="key-action">Saltar</span>
+                                    <button class="key-button" data-action="jump">ESPACIO</button>
+                                </div>
+                                <div class="keybinding-item">
+                                    <span class="key-action">Habilidad 1</span>
+                                    <button class="key-button" data-action="ability1">Q</button>
+                                </div>
+                                <div class="keybinding-item">
+                                    <span class="key-action">Habilidad 2</span>
+                                    <button class="key-button" data-action="ability2">E</button>
+                                </div>
+                                <div class="keybinding-item">
+                                    <span class="key-action">Habilidad Definitiva</span>
+                                    <button class="key-button" data-action="ultimate">R</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Reiniciar controles -->
+                        <div class="setting-item">
+                            <div class="setting-control">
+                                <button class="reset-btn" id="reset-controls">
+                                    <span class="btn-icon">🔄</span>
+                                    <span class="btn-text">REINICIAR A CONFIGURACIÓN PREDETERMINADA</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Otras categorías se implementarían de manera similar -->
+                <!-- Por brevedad, solo muestro las principales -->
+            </div>
+
+            <!-- Panel de resumen -->
+            <div class="config-summary">
+                <h3 class="summary-title">RESUMEN DE CONFIGURACIÓN</h3>
+                
+                <div class="summary-content">
+                    <div class="summary-item">
+                        <span class="summary-label">Resolución:</span>
+                        <span class="summary-value" id="summary-resolution">1920x1080</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Calidad:</span>
+                        <span class="summary-value" id="summary-quality">Alta</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">FPS:</span>
+                        <span class="summary-value" id="summary-fps">144</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Volumen:</span>
+                        <span class="summary-value" id="summary-volume">80%</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Sensibilidad:</span>
+                        <span class="summary-value" id="summary-sensitivity">15.00</span>
+                    </div>
+                </div>
+
+                <div class="summary-actions">
+                    <button class="action-btn apply-btn">
+                        <span class="btn-icon">✓</span>
+                        <span class="btn-text">APLICAR CAMBIOS</span>
+                    </button>
+                    
+                    <button class="action-btn cancel-btn">
+                        <span class="btn-icon">✕</span>
+                        <span class="btn-text">CANCELAR</span>
+                    </button>
+                    
+                    <button class="action-btn save-btn">
+                        <span class="btn-icon">💾</span>
+                        <span class="btn-text">GUARDAR PERFIL</span>
+                    </button>
+                </div>
+
+                <div class="performance-warning" id="performance-warning">
+                    <span class="warning-icon">⚠️</span>
+                    <span class="warning-text">
+                        La configuración actual puede afectar el rendimiento en tu sistema.
+                        <span class="warning-details" id="warning-details"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/config-interactive.js"></script>
+</body>
+</html>

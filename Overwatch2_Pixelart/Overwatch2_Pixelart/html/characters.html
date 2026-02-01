@@ -5,28 +5,103 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Selección de Personajes - Overwatch 2 Pixel</title>
     
+    <!-- Fuentes -->
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/characters.css">
     <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
+    <!-- Estilos adicionales para esta página -->
+    <style>
+        /* Estilos específicos para página de personajes independiente */
+        .characters-page {
+            min-height: 100vh;
+            background: var(--ow-black);
+        }
+        
+        .back-to-demo {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+        }
+        
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background-color: var(--ow-dark-gray);
+            color: var(--ow-light-gray);
+            border: 2px solid var(--ow-orange);
+            font-family: 'Oswald', sans-serif;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+            border-radius: 2px;
+        }
+        
+        .back-btn:hover {
+            background-color: var(--ow-orange);
+            color: var(--ow-black);
+        }
+        
+        /* Ajustes para pantalla completa */
+        .characters-container {
+            padding-top: 2rem;
+        }
+        
+        /* Estilos para las skins de diferentes héroes */
+        .skin-preview {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-size: 2rem;
+            color: white;
+            text-shadow: 2px 2px 0 #000;
+        }
+        
+        .tracer-skin .skin-preview { background-color: #FF9C00; }
+        .genji-skin .skin-preview { background-color: #4CD964; }
+        .mercy-skin .skin-preview { background-color: #FFFFFF; color: #333; }
+        .winston-skin .skin-preview { background-color: #FF9C00; }
+    </style>
 </head>
 <body class="characters-page">
+    <!-- Botón para volver a demo -->
+    <div class="back-to-demo">
+        <a href="demo.html" class="back-btn">
+            <span class="btn-icon">←</span>
+            <span class="btn-text">VOLVER A DEMO</span>
+        </a>
+    </div>
+    
+    <!-- Contenedor principal -->
     <div class="characters-container">
         <!-- Encabezado -->
         <div class="characters-header">
             <h1 class="characters-title">SELECCIÓN DE PERSONAJES</h1>
-            <p class="characters-subtitle">Aquí tenemos los 4 héroes más icónicos de Overwatch 2 en estilo pixel art</p>
+            <p class="characters-subtitle">Elige entre 4 héroes icónicos de Overwatch 2 en estilo pixel art</p>
         </div>
 
         <!-- Contenido principal -->
         <div class="characters-main">
-            <!-- Lista de personajes -->
+            <!-- Lista de personajes (izquierda) -->
             <div class="characters-list">
+                <!-- Tracer -->
                 <div class="hero-item active" data-hero="tracer">
                     <div class="hero-avatar">
                         <div class="avatar-frame">
-                            <div class="avatar-image tracer-avatar"></div>
+                            <div class="avatar-image tracer-avatar" style="background-color: #FF9C00;">
+                                <div class="avatar-text">T</div>
+                            </div>
                         </div>
                     </div>
                     <div class="hero-info-short">
@@ -43,10 +118,13 @@
                     </div>
                 </div>
 
+                <!-- Genji -->
                 <div class="hero-item" data-hero="genji">
                     <div class="hero-avatar">
                         <div class="avatar-frame">
-                            <div class="avatar-image genji-avatar"></div>
+                            <div class="avatar-image genji-avatar" style="background-color: #4CD964;">
+                                <div class="avatar-text">G</div>
+                            </div>
                         </div>
                     </div>
                     <div class="hero-info-short">
@@ -63,10 +141,13 @@
                     </div>
                 </div>
 
+                <!-- Mercy -->
                 <div class="hero-item" data-hero="mercy">
                     <div class="hero-avatar">
                         <div class="avatar-frame">
-                            <div class="avatar-image mercy-avatar"></div>
+                            <div class="avatar-image mercy-avatar" style="background-color: #FFFFFF;">
+                                <div class="avatar-text">M</div>
+                            </div>
                         </div>
                     </div>
                     <div class="hero-info-short">
@@ -83,10 +164,13 @@
                     </div>
                 </div>
 
+                <!-- Winston -->
                 <div class="hero-item" data-hero="winston">
                     <div class="hero-avatar">
                         <div class="avatar-frame">
-                            <div class="avatar-image winston-avatar"></div>
+                            <div class="avatar-image winston-avatar" style="background-color: #FF9C00;">
+                                <div class="avatar-text">W</div>
+                            </div>
                         </div>
                     </div>
                     <div class="hero-info-short">
@@ -104,7 +188,7 @@
                 </div>
             </div>
 
-            <!-- Área de visualización del personaje -->
+            <!-- Área de visualización del personaje (derecha) -->
             <div class="character-display">
                 <!-- Slideshow de skins -->
                 <div class="skin-slideshow-container">
@@ -120,57 +204,47 @@
                             <button class="slideshow-btn next-btn">
                                 <span class="btn-icon">►</span>
                             </button>
+                            <button class="slideshow-btn autoplay-btn" title="Autoplay">
+                                <span class="btn-icon">⏸️</span>
+                            </button>
                         </div>
                     </div>
                     
-                    <div class="skin-slideshow">
-                        <div class="slide active" data-skin="1">
-                            <div class="slide-image tracer-default"></div>
-                            <div class="slide-info">
-                                <h4 class="skin-name">CLÁSICA</h4>
-                                <p class="skin-rarity common">COMÚN</p>
-                            </div>
-                        </div>
-                        
-                        <div class="slide" data-skin="2">
-                            <div class="slide-image tracer-legendary"></div>
-                            <div class="slide-info">
-                                <h4 class="skin-name">ADVENTURER</h4>
-                                <p class="skin-rarity legendary">LEGENDARIA</p>
-                            </div>
-                        </div>
-                        
-                        <div class="slide" data-skin="3">
-                            <div class="slide-image tracer-epic"></div>
-                            <div class="slide-info">
-                                <h4 class="skin-name">GRAFITTI</h4>
-                                <p class="skin-rarity epic">LEGENDARIA</p>
-                            </div>
-                        </div>
-                        
-                        <div class="slide" data-skin="4">
-                            <div class="slide-image tracer-rare"></div>
-                            <div class="slide-info">
-                                <h4 class="skin-name">ALLSTARS</h4>
-                                <p class="skin-rarity rare">LEGENDARIA</p>
-                            </div>
-                        </div>
+                    <!-- Contenedor del slideshow -->
+                    <div class="skin-slideshow" id="skinSlideshow">
+                        <!-- Las slides se generan dinámicamente con JavaScript -->
                     </div>
-
-                    <div class="slide" data-skin="4">
-                            <div class="slide-image tracer-rare"></div>
-                            <div class="slide-info">
-                                <h4 class="skin-name">SPRINTER</h4>
-                                <p class="skin-rarity rare">LEGENDARIA</p>
-                            </div>
+                    
+                    <!-- Dots de navegación -->
+                    <div class="slideshow-dots" id="slideshowDots">
+                        <!-- Los dots se generan dinámicamente -->
+                    </div>
+                    
+                    <!-- Información de la skin actual -->
+                    <div class="current-skin-info">
+                        <h4 id="currentSkinName">CLÁSICA</h4>
+                        <div class="skin-details">
+                            <span class="skin-rarity" id="currentSkinRarity">COMÚN</span>
+                            <span class="skin-price" id="currentSkinPrice">GRATIS</span>
                         </div>
                     </div>
                     
-                    <div class="slideshow-dots">
-                        <button class="dot active" data-slide="0"></button>
-                        <button class="dot" data-slide="1"></button>
-                        <button class="dot" data-slide="2"></button>
-                        <button class="dot" data-slide="3"></button>
+                    <!-- Acciones -->
+                    <div class="slideshow-actions">
+                        <button class="action-btn favorite-btn" id="favoriteSkin">
+                            <span class="btn-icon">🤍</span>
+                            <span class="btn-text">FAVORITO</span>
+                        </button>
+                        
+                        <button class="action-btn buy-btn" id="buySkin">
+                            <span class="btn-icon">🛒</span>
+                            <span class="btn-text">COMPRAR</span>
+                        </button>
+                        
+                        <button class="action-btn equip-btn" id="equipSkin">
+                            <span class="btn-icon">👤</span>
+                            <span class="btn-text">EQUIPAR</span>
+                        </button>
                     </div>
                 </div>
 
@@ -182,43 +256,54 @@
                             <span class="real-name" id="current-real-name">Lena Oxton</span>
                             <span class="age" id="current-age">26 años</span>
                             <span class="origin" id="current-origin">Londres, Inglaterra</span>
+                            <span class="affiliation" id="current-affiliation">Overwatch</span>
                         </div>
                     </div>
 
+                    <!-- Estadísticas del personaje -->
                     <div class="character-stats">
-                        <div class="stat-item">
-                            <div class="stat-label">DAÑO</div>
+                        <div class="stat-item" data-stat="damage">
+                            <div class="stat-label">
+                                <span>DAÑO</span>
+                                <span class="stat-value">8/10</span>
+                            </div>
                             <div class="stat-bar">
                                 <div class="stat-fill" style="width: 80%"></div>
                             </div>
-                            <div class="stat-value">8/10</div>
                         </div>
                         
-                        <div class="stat-item">
-                            <div class="stat-label">MOVILIDAD</div>
+                        <div class="stat-item" data-stat="mobility">
+                            <div class="stat-label">
+                                <span>MOVILIDAD</span>
+                                <span class="stat-value">9.5/10</span>
+                            </div>
                             <div class="stat-bar">
                                 <div class="stat-fill" style="width: 95%"></div>
                             </div>
-                            <div class="stat-value">9.5/10</div>
                         </div>
                         
-                        <div class="stat-item">
-                            <div class="stat-label">SUPERVIVENCIA</div>
+                        <div class="stat-item" data-stat="survival">
+                            <div class="stat-label">
+                                <span>SUPERVIVENCIA</span>
+                                <span class="stat-value">4/10</span>
+                            </div>
                             <div class="stat-bar">
                                 <div class="stat-fill" style="width: 40%"></div>
                             </div>
-                            <div class="stat-value">4/10</div>
                         </div>
                         
-                        <div class="stat-item">
-                            <div class="stat-label">UTILIDAD</div>
+                        <div class="stat-item" data-stat="utility">
+                            <div class="stat-label">
+                                <span>UTILIDAD</span>
+                                <span class="stat-value">6/10</span>
+                            </div>
                             <div class="stat-bar">
                                 <div class="stat-fill" style="width: 60%"></div>
                             </div>
-                            <div class="stat-value">6/10</div>
                         </div>
                     </div>
 
+                    <!-- Descripción del personaje -->
                     <div class="character-description">
                         <h3 class="description-title">HISTORIA</h3>
                         <p class="description-text" id="current-bio">
@@ -230,9 +315,10 @@
                         </p>
                     </div>
 
+                    <!-- Habilidades del personaje -->
                     <div class="character-abilities">
                         <h3 class="abilities-title">HABILIDADES</h3>
-                        <div class="abilities-grid">
+                        <div class="abilities-grid" id="abilitiesGrid">
                             <!-- Las habilidades se cargan dinámicamente -->
                         </div>
                     </div>
@@ -240,28 +326,1109 @@
             </div>
         </div>
 
-        <!-- Controles -->
+        <!-- Controles de selección -->
         <div class="characters-controls">
-            <button class="control-btn select-btn">
-                <span class="btn-icon">✓</span>
-                <span class="btn-text">SELECCIONAR PERSONAJE</span>
-            </button>
+            <div class="controls-left">
+                <button class="control-btn select-btn" id="selectHero">
+                    <span class="btn-icon">✓</span>
+                    <span class="btn-text">SELECCIONAR PERSONAJE</span>
+                </button>
+                
+                <button class="control-btn random-btn" id="randomHero">
+                    <span class="btn-icon">🎲</span>
+                    <span class="btn-text">ALEATORIO</span>
+                </button>
+            </div>
             
-            <button class="control-btn random-btn">
-                <span class="btn-icon">🎲</span>
-                <span class="btn-text">ALEATORIO</span>
-            </button>
+            <div class="controls-right">
+                <div class="selection-status">
+                    <span class="status-label">PERSONAJE SELECCIONADO:</span>
+                    <span class="status-value" id="selected-hero-name">NINGUNO</span>
+                </div>
+                
+                <div class="current-skin-display">
+                    <span class="skin-label">SKIN EQUIPADA:</span>
+                    <span class="skin-value" id="equipped-skin">CLÁSICA</span>
+                </div>
+                
+                <div class="selection-actions">
+                    <button class="action-btn reset-btn" id="resetSelection">
+                        <span class="btn-icon">🔄</span>
+                        <span class="btn-text">REINICIAR</span>
+                    </button>
+                    
+                    <button class="action-btn confirm-btn" id="confirmSelection">
+                        <span class="btn-icon">🚀</span>
+                        <span class="btn-text">CONFIRMAR</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Información adicional -->
+        <div class="characters-info">
+            <div class="info-tabs">
+                <button class="info-tab active" data-tab="tips">CONSEJOS</button>
+                <button class="info-tab" data-tab="counters">CONTRA PICKS</button>
+                <button class="info-tab" data-tab="synergy">SINERGIA</button>
+                <button class="info-tab" data-tab="skins">COLECCIÓN SKINS</button>
+            </div>
             
-            <div class="selection-status">
-                <span class="status-label">PERSONAJE SELECCIONADO:</span>
-                <span class="status-value">NINGUNO</span>
+            <div class="info-content">
+                <div class="tab-content active" id="tips-content">
+                    <h4>Consejos para jugar con <span id="tips-hero-name">Tracer</span>:</h4>
+                    <ul id="tips-list">
+                        <li>Usa la Traslación para flanquear a los enemigos</li>
+                        <li>La Regresión Temporal puede salvar tu vida - úsala sabiamente</li>
+                        <li>Acércate sigilosamente para usar la Bomba de Pulsos</li>
+                        <li>Mantente en movimiento constante - eres un objetivo difícil de alcanzar</li>
+                        <li>Enfócate en soportes y dps enemigos</li>
+                    </ul>
+                </div>
+                
+                <div class="tab-content" id="counters-content">
+                    <h4>Héroes que contrarrestan a <span id="counters-hero-name">Tracer</span>:</h4>
+                    <div class="counter-list" id="counters-list">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="synergy-content">
+                    <h4>Héroes con buena sinergia con <span id="synergy-hero-name">Tracer</span>:</h4>
+                    <div class="synergy-list" id="synergy-list">
+                        <!-- Contenido dinámico -->
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="skins-content">
+                    <h4>Colección de Skins de <span id="skins-hero-name">Tracer</span>:</h4>
+                    <div class="skin-collection">
+                        <div class="collection-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Total Skins:</span>
+                                <span class="stat-value" id="total-skins">4</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Desbloqueadas:</span>
+                                <span class="stat-value" id="unlocked-skins">1</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Favoritas:</span>
+                                <span class="stat-value" id="favorite-skins">0</span>
+                            </div>
+                        </div>
+                        <div class="collection-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="collection-progress" style="width: 25%"></div>
+                            </div>
+                            <span class="progress-text">25% completada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Notas de diseño -->
+        <div class="design-notes">
+            <h4>NOTAS DE DISEÑO - PIXEL ART</h4>
+            <p>
+                Todos los personajes han sido rediseñados en estilo pixel art manteniendo sus características icónicas.
+                Cada skin tiene variaciones de color que respetan la paleta Overwatch pero adaptadas al estilo retro.
+                Cada héroe tiene 4 skins únicas con diferentes niveles de rareza.
+            </p>
+            <div class="palette-display">
+                <div class="color-box" style="background-color: #FF9C00;" title="Naranja Overwatch"></div>
+                <div class="color-box" style="background-color: #FFE600;" title="Amarillo Overwatch"></div>
+                <div class="color-box" style="background-color: #0F0F0F;" title="Negro"></div>
+                <div class="color-box" style="background-color: #1A1A1A;" title="Gris Oscuro"></div>
+                <div class="color-box" style="background-color: #CCCCCC;" title="Gris Claro"></div>
             </div>
         </div>
     </div>
 
+    <!-- Footer -->
+    <footer class="characters-footer">
+        <div class="footer-content">
+            <p class="footer-text">
+                <strong>OVERWATCH 2 PIXEL REBRAND</strong> - Proyecto académico de Videojugos - Diseño Web Avanzado
+            </p>
+            <p class="footer-note">
+                Todos los personajes y elementos son propiedad de Blizzard Entertainment. 
+            </p>
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Inicio</a>
+                <a href="demo.html" class="footer-link">Demo</a>
+                <a href="config.html" class="footer-link">Configuración</a>
+                <a href="hud.html" class="footer-link">HUD</a>
+            </div>
+        </div>
+    </footer>
+
     <!-- Scripts -->
     <script src="js/main.js"></script>
-    <script src="js/characters-slideshow.js"></script>
-    <script src="js/characters-data.js"></script>
+    
+    <!-- Script específico para esta página -->
+    <script>
+        $(document).ready(function() {
+            console.log('Página de personajes cargada');
+            
+            // Datos completos de todos los héroes
+            const heroesData = {
+                tracer: {
+                    name: 'Tracer',
+                    realName: 'Lena Oxton',
+                    role: 'Daño',
+                    age: 26,
+                    origin: 'Londres, Inglaterra',
+                    birthday: '17 de febrero',
+                    affiliation: 'Overwatch',
+                    base: 'Londres, Inglaterra',
+                    difficulty: 2,
+                    stats: {
+                        damage: 8,
+                        mobility: 10,
+                        survival: 4,
+                        utility: 6
+                    },
+                    bio: 'Lena Oxton era la piloto de pruebas más joven del programa experimental de teleportación de Overwatch. Durante una misión fallida, su avión se desintegró y ella quedó desfasada en el tiempo, apareciendo y desapareciendo de la realidad. Winston y Mercy lograron estabilizarla con un acelerador cronológico implantado en su pecho. Desde entonces, Tracer se convirtió en el rostro alegre y valiente de Overwatch, luchando por la justicia en todo el mundo.',
+                    abilities: [
+                        {
+                            name: 'Pistolas de pulso',
+                            icon: '🔫',
+                            description: 'Disparas dos armas automáticas de corto alcance con gran cadencia.',
+                            cooldown: 'N/A',
+                            type: 'Primaria'
+                        },
+                        {
+                            name: 'Traslación',
+                            icon: '⚡',
+                            description: 'Te teletransportas rápidamente en la dirección en la que te mueves.',
+                            cooldown: '3s',
+                            type: 'Habilidad'
+                        },
+                        {
+                            name: 'Regresión temporal',
+                            icon: '🕰️',
+                            description: 'Regresas a la posición, salud y munición que tenías hace unos segundos.',
+                            cooldown: '12s',
+                            type: 'Habilidad'
+                        },
+                        {
+                            name: 'Bomba de pulsos',
+                            icon: '💣',
+                            description: 'Lanzas una carga explosiva que se adhiere a enemigos o superficies y detona tras unos instantes.',
+                            cooldown: 'Ultimate',
+                            type: 'Definitiva'
+                        }
+                    ],
+                    skins: [
+                        { 
+                            name: 'Clásica', 
+                            rarity: 'Común', 
+                            color: '#FF9C00',
+                            price: 'Gratis',
+                            unlocked: true,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Adventurer', 
+                            rarity: 'Legendaria', 
+                            color: '#9B59B6',
+                            price: '1500 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+                        { 
+                            name: 'AllStars', 
+                            rarity: 'Legendaria', 
+                            color: '#9B59B6',
+                            price: '1250 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Grafitti', 
+                            rarity: 'Legendaria', 
+                            color: '#9B59B6',
+                            price: '1400 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Sprinter', 
+                            rarity: 'Legendaria', 
+                            color: '#9B59B6',
+                            price: '1350 créditos',
+                            unlocked: false,
+                            favorite: false
+                        }
+                    ],
+                    tips: [
+                        'Usa la Traslación para flanquear a los enemigos',
+                        'La Regresión Temporal puede salvar tu vida - úsala sabiamente',
+                        'Acércate sigilosamente para usar la Bomba de Pulsos',
+                        'Mantente en movimiento constante - eres un objetivo difícil de alcanzar',
+                        'Enfócate en soportes y dañadores enemigos'
+                    ],
+                    counters: [
+                        { name: 'Brigitte', reason: 'Golpe por golpe y escudo' },
+                        { name: 'McCree', reason: 'Flashbang y alto daño por disparo' },
+                        { name: 'Symmetra', reason: 'Turretas y arma de carga' }
+                    ],
+                    synergy: [
+                        { name: 'Mercy', reason: 'Curación y daño boost' },
+                        { name: 'Zarya', reason: 'Burbuja protectora' },
+                        { name: 'Sombra', reason: 'Hackeo y flanqueo conjunto' }
+                    ]
+                },
+                genji: {
+                    name: 'Genji',
+                    realName: 'Genji Shimada',
+                    role: 'Daño',
+                    age: 35,
+                    origin: 'Japón',
+                    birthday: 'Desconocido',
+                    affiliation: 'Overwatch',
+                    base: 'Japón',
+                    difficulty: 3,
+                    stats: {
+                        damage: 9,
+                        mobility: 9,
+                        survival: 5,
+                        utility: 7
+                    },
+                    bio: 'Hijo menor del clan Shimada, fue herido por su hermano Hanzo y reconstruido como cyborg por Overwatch. Encontró paz con Zenyatta. Luchó como agente de alto impacto tras la reunificación.',
+                    abilities: [
+                        {
+                            name: 'Shurikens',
+                            icon: '🌟',
+                            description: 'Lanzas tres estrellas ninja.',
+                            cooldown: 'N/A',
+                            type: 'Primaria'
+                        },
+                        {
+                            name: 'Desvío',
+                            icon: '🛡️',
+                            description: 'Rediriges proyectiles.',
+                            cooldown: '8s',
+                            type: 'Habilidad'
+                        },
+                        {
+                            name: 'Salto con giro',
+                            icon: '🌀',
+                            description: 'Desplazamiento rápido.',
+                            cooldown: '6s',
+                            type: 'Habilidad'
+                        },
+                        {
+                            name: 'Dragonblade',
+                            icon: '🐉',
+                            description: 'Espada dragón de gran daño.',
+                            cooldown: 'Ultimate',
+                            type: 'Definitiva'
+                        }
+                    ],
+                    skins: [
+                        { 
+                            name: 'Clásica', 
+                            rarity: 'Común', 
+                            color: '#4CD964',
+                            price: 'Gratis',
+                            unlocked: true,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Oni', 
+                            rarity: 'Legendaria', 
+                            color: '#FF3B30',
+                            price: '1500 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Knight', 
+                            rarity: 'Épica', 
+                            color: '#CCCCCC',
+                            price: '750 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Genjiman', 
+                            rarity: 'Legendaria', 
+                            color: '#FF3B30',
+                            price: '1800 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+
+                        { 
+                            name: 'Cyberdemon', 
+                            rarity: 'Legendaria', 
+                            color: '#FF3B30',
+                            price: '1750 créditos',
+                            unlocked: false,
+                            favorite: false
+                        }
+                    ],
+                    tips: [
+                        'Usa los Shurikens a distancia y cuerpo a cuerpo',
+                        'El Desvío es perfecto contra personajes de alto daño',
+                        'Combina Salto con Giro con Dragonblade para sorprender enemigos',
+                        'Espera el momento adecuado para usar tu definitiva',
+                        'Flanquea constantemente a los enemigos'
+                    ],
+                    counters: [
+                        { name: 'Winston', reason: 'Daño área y escudo' },
+                        { name: 'Mei', reason: 'Congelación y hielo' },
+                        { name: 'Symmetra', reason: 'Torretas y rayo de carga' }
+                    ],
+                    synergy: [
+                        { name: 'Ana', reason: 'Nano boost para Dragonblade' },
+                        { name: 'Zenyatta', reason: 'Orbe de armonía y discordia' },
+                        { name: 'Mercy', reason: 'Daño boost para aumentar letalidad' }
+                    ]
+                },
+                mercy: {
+                    name: 'Mercy',
+                    realName: 'Dra. Angela Ziegler',
+                    role: 'Apoyo',
+                    age: 37,
+                    origin: 'Zúrich, Suiza',
+                    birthday: 'Desconocido',
+                    affiliation: 'Overwatch',
+                    base: 'Zúrich, Suiza',
+                    difficulty: 1,
+                    stats: {
+                        damage: 3,
+                        mobility: 8,
+                        survival: 5,
+                        utility: 10
+                    },
+                    bio: 'Angela Ziegler es una médica y científica suiza reconocida internacionalmente. Fue directora de investigación en Overwatch, desarrollando tecnologías médicas que salvaron millones de vidas. Como jefa médica, lideró misiones humanitarias por todo el mundo.',
+                    abilities: [
+                        {
+                            name: 'Caduceus Staff',
+                            icon: '➕',
+                            description: 'Sanación o aumento de daño continuo a un aliado.',
+                            cooldown: 'N/A',
+                            type: 'Primaria'
+                        },
+                        {
+                            name: 'Caduceus Blaster',
+                            icon: '🔫',
+                            description: 'Arma secundaria para defensa personal.',
+                            cooldown: 'N/A',
+                            type: 'Secundaria'
+                        },
+                        {
+                            name: 'Ángel Guardián',
+                            icon: '👼',
+                            description: 'Te desplazas volando hacia un aliado.',
+                            cooldown: '1.5s',
+                            type: 'Habilidad'
+                        },
+                        {
+                            name: 'Resurrección',
+                            icon: '❤️',
+                            description: 'Devuelves a la vida a un compañero.',
+                            cooldown: '30s',
+                            type: 'Habilidad'
+                        }
+                    ],
+                    skins: [
+                        { 
+                            name: 'Clásica', 
+                            rarity: 'Común', 
+                            color: '#FFFFFF',
+                            price: 'Gratis',
+                            unlocked: true,
+                            favorite: false
+                        },
+                        { 
+                            name: 'AllStars', 
+                            rarity: 'Legendaria', 
+                            color: '#FFE600',
+                            price: '1500 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+                        { 
+                            name: 'RoyalKnight', 
+                            rarity: 'Legendaria', 
+                            color: '#FFE600',
+                            price: '1750 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Vengeance', 
+                            rarity: 'Legendaria', 
+                            color: '#FFE600',
+                            price: '1350 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+
+                        { 
+                            name: 'Pink', 
+                            rarity: 'Rara', 
+                            color: '#4CD964',
+                            price: '1350 créditos',
+                            unlocked: false,
+                            favorite: false
+                        }
+                    ],
+                    tips: [
+                        'Prioriza la curación de tanques y dañadores',
+                        'Usa Ángel Guardián para moverte rápidamente por el campo de batalla',
+                        'La Resurrección debe usarse desde una posición segura',
+                        'Alterna entre curación y daño boost según la situación',
+                        'Mantente siempre en movimiento para evitar ser objetivo fácil'
+                    ],
+                    counters: [
+                        { name: 'Widowmaker', reason: 'Un headshot puede eliminarte' },
+                        { name: 'Genji', reason: 'Movilidad y daño de cerca' },
+                        { name: 'Tracer', reason: 'Movilidad y daño rápido' }
+                    ],
+                    synergy: [
+                        { name: 'Pharah', reason: 'Combo clásico de cielo' },
+                        { name: 'Reinhardt', reason: 'Curación constante para tanque' },
+                        { name: 'Soldier: 76', reason: 'Daño boost para su rifle' }
+                    ]
+                },
+                winston: {
+                    name: 'Winston',
+                    realName: 'Winston',
+                    role: 'Tanque',
+                    age: 29,
+                    origin: 'Colonia Lunar Horizon',
+                    birthday: 'Desconocido',
+                    affiliation: 'Overwatch',
+                    base: 'Numbani',
+                    difficulty: 2,
+                    stats: {
+                        damage: 6,
+                        mobility: 7,
+                        survival: 9,
+                        utility: 8
+                    },
+                    bio: 'Winston nació en la Colonia Lunar Horizon, donde los simios fueron modificados genéticamente. Tras escapar, decidió proteger a la humanidad. Reactivó Overwatch con su llamada global.',
+                    abilities: [
+                        {
+                            name: 'Cañón Tesla',
+                            icon: '⚡',
+                            description: 'Haz eléctrico que daña a múltiples enemigos.',
+                            cooldown: 'N/A',
+                            type: 'Primaria'
+                        },
+                        {
+                            name: 'Paquete de salto',
+                            icon: '🚀',
+                            description: 'Salto propulsado de gran alcance.',
+                            cooldown: '5s',
+                            type: 'Habilidad'
+                        },
+                        {
+                            name: 'Campo de protección',
+                            icon: '🛡️',
+                            description: 'Escudo esférico.',
+                            cooldown: '13s',
+                            type: 'Habilidad'
+                        },
+                        {
+                            name: 'Furia primigenia',
+                            icon: '🦍',
+                            description: 'Aumenta salud y potencia cuerpo a cuerpo.',
+                            cooldown: 'Ultimate',
+                            type: 'Definitiva'
+                        }
+                    ],
+                    skins: [
+                        { 
+                            name: 'Clásica', 
+                            rarity: 'Común', 
+                            color: '#FF9C00',
+                            price: 'Gratis',
+                            unlocked: true,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Explorador', 
+                            rarity: 'Legendaria', 
+                            color: '#007AFF',
+                            price: '1500 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Yeti', 
+                            rarity: 'Épica', 
+                            color: '#FFFFFF',
+                            price: '750 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+                        { 
+                            name: 'Blanka', 
+                            rarity: 'Legendria', 
+                            color: '#007AFF',
+                            price: '1250 créditos',
+                            unlocked: false,
+                            favorite: false
+                        },
+
+                        { 
+                            name: 'Gárgola', 
+                            rarity: 'Legendaria', 
+                            color: '#007AFF',
+                            price: '1250 créditos',
+                            unlocked: false,
+                            favorite: false
+                        }
+                    ],
+                    tips: [
+                        'Usa el Paquete de Salto para saltar sobre soportes enemigos',
+                        'El Cañón Tesla es efectivo contra grupos y personajes ágiles',
+                        'Coloca el Campo de Protección estratégicamente para proteger aliados',
+                        'La Furia Primigenia es excelente para hacer espacio y capturar objetivos',
+                        'Coordina saltos con tu equipo para emboscadas efectivas'
+                    ],
+                    counters: [
+                        { name: 'Reaper', reason: 'Alto daño de cerca' },
+                        { name: 'Bastion', reason: 'Daño sostenido masivo' },
+                        { name: 'Roadhog', reason: 'Gancho y alto daño' }
+                    ],
+                    synergy: [
+                        { name: 'D.Va', reason: 'Doble tanque de movilidad' },
+                        { name: 'Zenyatta', reason: 'Orbe de armonía para Winston saltador' },
+                        { name: 'Genji', reason: 'Ambos pueden saltar sobre backline' }
+                    ]
+                }
+            };
+            
+            // Variables del slideshow
+            let currentSlide = 0;
+            let currentHero = 'tracer';
+            let slideInterval;
+            let autoPlay = true;
+            
+            // Inicializar página
+            initPage();
+            
+            function initPage() {
+                // Cargar Tracer por defecto
+                loadHero('tracer');
+                
+                // Configurar eventos
+                setupEventListeners();
+                
+                // Iniciar slideshow
+                startSlideshow();
+            }
+            
+            function loadHero(heroKey) {
+                const heroData = heroesData[heroKey];
+                if (!heroData) return;
+                
+                currentHero = heroKey;
+                
+                // Actualizar información básica
+                $('#current-hero-name').text(heroData.name);
+                $('#current-real-name').text(heroData.realName);
+                $('#current-age').text(heroData.age + ' años');
+                $('#current-origin').text(heroData.origin);
+                $('#current-affiliation').text(heroData.affiliation);
+                $('#current-bio').text(heroData.bio);
+                
+                // Actualizar nombre en tabs
+                $('#tips-hero-name, #counters-hero-name, #synergy-hero-name, #skins-hero-name').text(heroData.name);
+                
+                // Actualizar estadísticas
+                updateStats(heroData.stats);
+                
+                // Actualizar habilidades
+                updateAbilities(heroData.abilities);
+                
+                // Actualizar skins
+                updateSkins(heroData.skins);
+                
+                // Actualizar información adicional
+                updateTips(heroData.tips);
+                updateCounters(heroData.counters);
+                updateSynergy(heroData.synergy);
+                updateCollectionStats(heroData.skins);
+                
+                // Actualizar dots del slideshow
+                updateSlideshowDots(heroData.skins.length);
+                
+                // Resetear slide a 0
+                currentSlide = 0;
+                showSlide(0);
+            }
+            
+            function updateStats(stats) {
+                $('[data-stat="damage"] .stat-fill').css('width', stats.damage * 10 + '%');
+                $('[data-stat="damage"] .stat-value').text(stats.damage + '/10');
+                
+                $('[data-stat="mobility"] .stat-fill').css('width', stats.mobility * 10 + '%');
+                $('[data-stat="mobility"] .stat-value').text(stats.mobility + '/10');
+                
+                $('[data-stat="survival"] .stat-fill').css('width', stats.survival * 10 + '%');
+                $('[data-stat="survival"] .stat-value').text(stats.survival + '/10');
+                
+                $('[data-stat="utility"] .stat-fill').css('width', stats.utility * 10 + '%');
+                $('[data-stat="utility"] .stat-value').text(stats.utility + '/10');
+            }
+            
+            function updateAbilities(abilities) {
+                const $grid = $('#abilitiesGrid');
+                $grid.empty();
+                
+                abilities.forEach(ability => {
+                    const abilityHTML = `
+                        <div class="ability-card">
+                            <div class="ability-header">
+                                <div class="ability-icon">${ability.icon}</div>
+                                <h4 class="ability-name">${ability.name}</h4>
+                            </div>
+                            <p class="ability-description">${ability.description}</p>
+                            <div class="ability-info">
+                                <span class="ability-type">${ability.type}</span>
+                                <span class="ability-cooldown">CD: ${ability.cooldown}</span>
+                            </div>
+                        </div>
+                    `;
+                    $grid.append(abilityHTML);
+                });
+            }
+            
+            function updateSkins(skins) {
+                const $slideshow = $('#skinSlideshow');
+                $slideshow.empty();
+                
+                skins.forEach((skin, index) => {
+                    const slideHTML = `
+                        <div class="slide ${index === 0 ? 'active' : ''}" data-index="${index}">
+                            <div class="slide-image" style="background-color: ${skin.color};">
+                                <div class="skin-preview">
+                                    <div class="hero-icon">${heroesData[currentHero].name.charAt(0)}</div>
+                                    <div class="skin-name-display">${skin.name}</div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    $slideshow.append(slideHTML);
+                });
+                
+                // Actualizar información de la skin actual
+                updateCurrentSkinInfo(skins[0]);
+            }
+            
+            function updateCurrentSkinInfo(skin) {
+                $('#currentSkinName').text(skin.name);
+                $('#currentSkinRarity').text(skin.rarity)
+                    .removeClass('common rare epic legendary')
+                    .addClass(skin.rarity.toLowerCase());
+                $('#currentSkinPrice').text(skin.price);
+                
+                // Actualizar botón de favoritos
+                const $favoriteBtn = $('#favoriteSkin');
+                if (skin.favorite) {
+                    $favoriteBtn.find('.btn-icon').text('❤️');
+                    $favoriteBtn.addClass('favorited');
+                } else {
+                    $favoriteBtn.find('.btn-icon').text('🤍');
+                    $favoriteBtn.removeClass('favorited');
+                }
+                
+                // Actualizar botón de compra
+                const $buyBtn = $('#buySkin');
+                if (skin.unlocked) {
+                    $buyBtn.find('.btn-text').text('YA COMPRADA');
+                    $buyBtn.prop('disabled', true);
+                } else {
+                    $buyBtn.find('.btn-text').text('COMPRAR');
+                    $buyBtn.prop('disabled', false);
+                }
+            }
+            
+            function updateSlideshowDots(totalSlides) {
+                const $dots = $('#slideshowDots');
+                $dots.empty();
+                
+                for (let i = 0; i < totalSlides; i++) {
+                    const dotHTML = `
+                        <button class="dot ${i === 0 ? 'active' : ''}" data-slide="${i}"></button>
+                    `;
+                    $dots.append(dotHTML);
+                }
+                
+                // Actualizar contador
+                $('.current-slide').text('1');
+                $('.total-slides').text(totalSlides);
+            }
+            
+            function updateTips(tips) {
+                const $tipsList = $('#tips-list');
+                $tipsList.empty();
+                
+                tips.forEach(tip => {
+                    $tipsList.append(`<li>${tip}</li>`);
+                });
+            }
+            
+            function updateCounters(counters) {
+                const $countersList = $('#counters-list');
+                $countersList.empty();
+                
+                counters.forEach(counter => {
+                    const counterHTML = `
+                        <div class="counter-item">
+                            <span class="counter-name">${counter.name}</span>
+                            <span class="counter-reason">${counter.reason}</span>
+                        </div>
+                    `;
+                    $countersList.append(counterHTML);
+                });
+            }
+            
+            function updateSynergy(synergy) {
+                const $synergyList = $('#synergy-list');
+                $synergyList.empty();
+                
+                synergy.forEach(syn => {
+                    const synergyHTML = `
+                        <div class="synergy-item">
+                            <span class="synergy-name">${syn.name}</span>
+                            <span class="synergy-reason">${syn.reason}</span>
+                        </div>
+                    `;
+                    $synergyList.append(synergyHTML);
+                });
+            }
+            
+            function updateCollectionStats(skins) {
+                const total = skins.length;
+                const unlocked = skins.filter(s => s.unlocked).length;
+                const favorites = skins.filter(s => s.favorite).length;
+                const percentage = Math.round((unlocked / total) * 100);
+                
+                $('#total-skins').text(total);
+                $('#unlocked-skins').text(unlocked);
+                $('#favorite-skins').text(favorites);
+                $('#collection-progress').css('width', percentage + '%');
+                $('.progress-text').text(percentage + '% completada');
+            }
+            
+            function showSlide(index) {
+                const slides = $('#skinSlideshow .slide');
+                const dots = $('#slideshowDots .dot');
+                const heroData = heroesData[currentHero];
+                
+                if (index >= slides.length) index = 0;
+                if (index < 0) index = slides.length - 1;
+                
+                // Ocultar todas las slides
+                slides.removeClass('active');
+                dots.removeClass('active');
+                
+                // Mostrar slide actual
+                slides.eq(index).addClass('active');
+                dots.eq(index).addClass('active');
+                
+                // Actualizar contador
+                $('.current-slide').text(index + 1);
+                
+                // Actualizar información de la skin
+                updateCurrentSkinInfo(heroData.skins[index]);
+                
+                currentSlide = index;
+            }
+            
+            function nextSlide() {
+                showSlide(currentSlide + 1);
+            }
+            
+            function prevSlide() {
+                showSlide(currentSlide - 1);
+            }
+            
+            function startSlideshow() {
+                if (autoPlay) {
+                    slideInterval = setInterval(nextSlide, 5000); // Cambia cada 5 segundos
+                }
+            }
+            
+            function stopSlideshow() {
+                if (slideInterval) {
+                    clearInterval(slideInterval);
+                    slideInterval = null;
+                }
+            }
+            
+            function toggleAutoplay() {
+                autoPlay = !autoPlay;
+                const $btn = $('.autoplay-btn');
+                
+                if (autoPlay) {
+                    $btn.find('.btn-icon').text('⏸️');
+                    startSlideshow();
+                    showNotification('Autoplay activado', 'info');
+                } else {
+                    $btn.find('.btn-icon').text('▶️');
+                    stopSlideshow();
+                    showNotification('Autoplay desactivado', 'info');
+                }
+            }
+            
+            function setupEventListeners() {
+                // Selección de personaje
+                $('.hero-item').on('click', function() {
+                    const heroKey = $(this).data('hero');
+                    
+                    // Actualizar selección visual
+                    $('.hero-item').removeClass('active');
+                    $(this).addClass('active');
+                    
+                    // Actualizar nombre seleccionado
+                    $('#selected-hero-name').text(heroesData[heroKey].name);
+                    
+                    // Cargar datos del héroe
+                    loadHero(heroKey);
+                    
+                    // Efecto de sonido
+                    playSound('click');
+                });
+                
+                // Controles del slideshow
+                $('.next-btn').on('click', function() {
+                    nextSlide();
+                    playSound('click');
+                });
+                
+                $('.prev-btn').on('click', function() {
+                    prevSlide();
+                    playSound('click');
+                });
+                
+                $('.autoplay-btn').on('click', function() {
+                    toggleAutoplay();
+                    playSound('click');
+                });
+                
+                // Dots del slideshow
+                $(document).on('click', '.dot', function() {
+                    const slideIndex = parseInt($(this).data('slide'));
+                    showSlide(slideIndex);
+                    playSound('click');
+                });
+                
+                // Pausar slideshow al interactuar
+                $('#skinSlideshow').on('mouseenter', stopSlideshow);
+                $('#skinSlideshow').on('mouseleave', function() {
+                    if (autoPlay) startSlideshow();
+                });
+                
+                // Botones de acción
+                $('#favoriteSkin').on('click', function() {
+                    const heroData = heroesData[currentHero];
+                    const skin = heroData.skins[currentSlide];
+                    
+                    // Toggle favorito
+                    skin.favorite = !skin.favorite;
+                    
+                    // Actualizar UI
+                    if (skin.favorite) {
+                        $(this).find('.btn-icon').text('❤️');
+                        $(this).addClass('favorited');
+                        showNotification(`"${skin.name}" añadida a favoritos`, 'success');
+                    } else {
+                        $(this).find('.btn-icon').text('🤍');
+                        $(this).removeClass('favorited');
+                        showNotification(`"${skin.name}" eliminada de favoritos`, 'info');
+                    }
+                    
+                    // Actualizar estadísticas
+                    updateCollectionStats(heroData.skins);
+                    
+                    playSound('click');
+                });
+                
+                $('#buySkin').on('click', function() {
+                    const heroData = heroesData[currentHero];
+                    const skin = heroData.skins[currentSlide];
+                    
+                    if (!skin.unlocked) {
+                        // Simular compra
+                        skin.unlocked = true;
+                        
+                        // Actualizar UI
+                        $(this).find('.btn-text').text('YA COMPRADA');
+                        $(this).prop('disabled', true);
+                        
+                        // Actualizar estadísticas
+                        updateCollectionStats(heroData.skins);
+                        
+                        showNotification(`¡Skin "${skin.name}" comprada!`, 'success');
+                        playSound('success');
+                    }
+                });
+                
+                $('#equipSkin').on('click', function() {
+                    const heroData = heroesData[currentHero];
+                    const skin = heroData.skins[currentSlide];
+                    
+                    if (skin.unlocked) {
+                        $('#equipped-skin').text(skin.name);
+                        showNotification(`Skin "${skin.name}" equipada`, 'success');
+                        playSound('success');
+                    } else {
+                        showNotification('Debes comprar la skin antes de equiparla', 'error');
+                        playSound('error');
+                    }
+                });
+                
+                // Botones de selección
+                $('#selectHero').on('click', function() {
+                    const selectedHero = $('#selected-hero-name').text();
+                    if (selectedHero && selectedHero !== 'NINGUNO') {
+                        showNotification(`¡${selectedHero} seleccionado!`, 'success');
+                        playSound('success');
+                        
+                        // Efecto visual
+                        $(this).addClass('selected');
+                        setTimeout(() => $(this).removeClass('selected'), 1000);
+                    }
+                });
+                
+                $('#randomHero').on('click', function() {
+                    const heroes = ['tracer', 'genji', 'mercy', 'winston'];
+                    const randomHero = heroes[Math.floor(Math.random() * heroes.length)];
+                    
+                    // Seleccionar aleatoriamente
+                    $(`.hero-item[data-hero="${randomHero}"]`).click();
+                    
+                    // Efecto especial
+                    $(this).addClass('spinning');
+                    setTimeout(() => $(this).removeClass('spinning'), 1000);
+                    
+                    showNotification('Personaje aleatorio seleccionado', 'info');
+                });
+                
+                $('#confirmSelection').on('click', function() {
+                    const selectedHero = $('#selected-hero-name').text();
+                    const equippedSkin = $('#equipped-skin').text();
+                    
+                    if (selectedHero && selectedHero !== 'NINGUNO') {
+                        // Guardar selección
+                        const selection = {
+                            hero: selectedHero,
+                            skin: equippedSkin,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        localStorage.setItem('character-selection', JSON.stringify(selection));
+                        
+                        showNotification(`¡${selectedHero} (${equippedSkin}) confirmado para la partida!`, 'success');
+                        playSound('success');
+                        
+                        // Redirigir después de 2 segundos
+                        setTimeout(() => {
+                            window.location.href = 'demo.html#characters';
+                        }, 2000);
+                    } else {
+                        showNotification('Por favor, selecciona un personaje primero', 'error');
+                        playSound('error');
+                    }
+                });
+                
+                $('#resetSelection').on('click', function() {
+                    if (confirm('¿Reiniciar toda la selección?')) {
+                        // Resetear a valores por defecto
+                        $('.hero-item').removeClass('active');
+                        $('.hero-item[data-hero="tracer"]').addClass('active');
+                        loadHero('tracer');
+                        $('#selected-hero-name').text('NINGUNO');
+                        $('#equipped-skin').text('CLÁSICA');
+                        
+                        showNotification('Selección reiniciada', 'info');
+                        playSound('click');
+                    }
+                });
+                
+                // Tabs de información
+                $('.info-tab').on('click', function() {
+                    const tabId = $(this).data('tab');
+                    
+                    // Actualizar tabs
+                    $('.info-tab').removeClass('active');
+                    $(this).addClass('active');
+                    
+                    // Mostrar contenido correspondiente
+                    $('.tab-content').removeClass('active');
+                    $(`#${tabId}-content`).addClass('active');
+                    
+                    playSound('click');
+                });
+                
+                // Navegación por teclado
+                $(document).on('keydown', function(e) {
+                    switch (e.key) {
+                        case 'ArrowLeft':
+                            prevSlide();
+                            e.preventDefault();
+                            break;
+                        case 'ArrowRight':
+                            nextSlide();
+                            e.preventDefault();
+                            break;
+                        case ' ':
+                            toggleAutoplay();
+                            e.preventDefault();
+                            break;
+                        case '1':
+                            $('.hero-item[data-hero="tracer"]').click();
+                            e.preventDefault();
+                            break;
+                        case '2':
+                            $('.hero-item[data-hero="genji"]').click();
+                            e.preventDefault();
+                            break;
+                        case '3':
+                            $('.hero-item[data-hero="mercy"]').click();
+                            e.preventDefault();
+                            break;
+                        case '4':
+                            $('.hero-item[data-hero="winston"]').click();
+                            e.preventDefault();
+                            break;
+                    }
+                });
+                
+                // Cargar selección guardada
+                const savedSelection = localStorage.getItem('character-selection');
+                if (savedSelection) {
+                    try {
+                        const selection = JSON.parse(savedSelection);
+                        const heroKey = selection.hero.toLowerCase();
+                        
+                        // Seleccionar héroe guardado
+                        $(`.hero-item[data-hero="${heroKey}"]`).click();
+                        
+                        // Mostrar skin equipada si existe
+                        if (selection.skin) {
+                            $('#equipped-skin').text(selection.skin);
+                        }
+                    } catch (error) {
+                        console.error('Error cargando selección:', error);
+                    }
+                }
+            }
+            
+            // Iniciar
+            initPage();
+        });
+    </script>
 </body>
 </html>
