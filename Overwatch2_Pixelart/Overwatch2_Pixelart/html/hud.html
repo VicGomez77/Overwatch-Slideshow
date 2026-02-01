@@ -3,421 +3,1583 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Configuración HUD - Overwatch 2 Pixel</title>
+    <title>HUD - Overwatch 2 Pixel Art Edition</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/hud.css">
-    <link rel="stylesheet" href="css/responsive.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-</head>
-<body class="hud-page">
-    <div class="hud-container">
-        <!-- Encabezado -->
-        <div class="hud-header">
-            <h1 class="hud-title">CONFIGURACIÓN DE HUD</h1>
-            <p class="hud-subtitle">Personaliza la interfaz de usuario y los elementos en pantalla</p>
-        </div>
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Reset y estilos base */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        <!-- Contenido principal -->
-        <div class="hud-main">
-            <!-- Panel de vista previa -->
-            <div class="hud-preview-container">
-                <div class="preview-header">
-                    <h3 class="preview-title">VISTA PREVIA DEL HUD</h3>
-                    <div class="preview-controls">
-                        <button class="preview-btn" id="reset-hud-position">
-                            <span class="btn-icon">🔄</span>
-                            <span class="btn-text">Reiniciar Posiciones</span>
+        body {
+            font-family: 'Oswald', sans-serif;
+            background: linear-gradient(135deg, #0d1524 0%, #1c2a44 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Variables de color */
+        :root {
+            --ow-orange: #f99e1a;
+            --ow-blue: #00b2ff;
+            --ow-dark: #0d1524;
+            --ow-darker: #090e1a;
+            --ow-light: #1c2a44;
+            --ow-white: #ffffff;
+            --ow-gray: #8b9cb3;
+            --hud-health: #4CAF50;  /* Verde suave para vida */
+            --hud-primary: #2196F3; /* Azul principal */
+            --hud-secondary: #9C27B0; /* Púrpura para habilidades */
+        }
+
+        /* Header */
+        .simple-header {
+            background: rgba(13, 21, 36, 0.95);
+            border-bottom: 3px solid var(--ow-orange);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        /* Logos del header */
+        .logo-container {
+            width: 150px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .logo-image {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+
+        .logo-placeholder {
+            width: 100%;
+            height: 100%;
+            background: rgba(249, 158, 26, 0.1);
+            border: 3px dashed var(--ow-orange);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--ow-gray);
+            font-size: 0.9rem;
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        /* Navegación */
+        .nav-center {
+            flex: 2;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .nav-link {
+            color: var(--ow-gray);
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 500;
+            padding: 0.5rem 1.5rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link:hover {
+            color: var(--ow-white);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .nav-link.active {
+            color: var(--ow-orange);
+            background: rgba(249, 158, 26, 0.1);
+            border: 1px solid rgba(249, 158, 26, 0.3);
+        }
+
+        /* Contenido principal */
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Título de la página */
+        .page-title {
+            text-align: center;
+            color: var(--ow-orange);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+        }
+
+        .page-subtitle {
+            text-align: center;
+            color: var(--ow-gray);
+            font-family: 'Roboto', sans-serif;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Contenedor de HUD */
+        .hud-container {
+            display: flex;
+            gap: 2rem;
+            min-height: 600px;
+        }
+
+        /* Panel lateral */
+        .hud-sidebar {
+            width: 320px;
+            background: rgba(28, 42, 68, 0.9);
+            border-radius: 15px;
+            border: 2px solid var(--ow-blue);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-title {
+            color: var(--ow-blue);
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            text-transform: uppercase;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid rgba(0, 178, 255, 0.3);
+        }
+
+        /* Selector de estilo HUD */
+        .hud-style {
+            margin-bottom: 2rem;
+        }
+
+        .style-title {
+            color: var(--ow-white);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .style-selectors {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .style-btn {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid var(--ow-gray);
+            border-radius: 8px;
+            color: var(--ow-gray);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 500;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .style-btn:hover {
+            border-color: var(--ow-blue);
+            color: var(--ow-white);
+        }
+
+        .style-btn.selected {
+            background: rgba(0, 178, 255, 0.2);
+            border-color: var(--ow-blue);
+            color: var(--ow-white);
+            box-shadow: 0 0 15px rgba(0, 178, 255, 0.3);
+        }
+
+        /* Opciones de personalización */
+        .custom-section {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            color: var(--ow-white);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .custom-option {
+            margin-bottom: 1.5rem;
+        }
+
+        .option-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .option-name {
+            color: var(--ow-gray);
+            font-size: 1rem;
+        }
+
+        .option-value {
+            color: var(--ow-orange);
+            font-weight: 500;
+            font-size: 1rem;
+        }
+
+        .slider-container {
+            width: 100%;
+        }
+
+        .hud-slider {
+            width: 100%;
+            height: 6px;
+            -webkit-appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            outline: none;
+        }
+
+        .hud-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--ow-blue);
+            cursor: pointer;
+            border: 2px solid var(--ow-white);
+        }
+
+        /* Color pickers */
+        .color-picker {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid var(--ow-white);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .color-preview:hover {
+            transform: scale(1.1);
+        }
+
+        .color-name {
+            font-family: 'Roboto', sans-serif;
+            color: var(--ow-gray);
+            font-size: 1rem;
+        }
+
+        /* Toggle switches */
+        .toggle-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .toggle-label {
+            font-family: 'Roboto', sans-serif;
+            color: var(--ow-gray);
+            font-size: 1rem;
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 26px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 13px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--ow-blue);
+        }
+
+        .toggle-knob {
+            width: 22px;
+            height: 22px;
+            background: var(--ow-white);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .toggle-switch.active .toggle-knob {
+            left: 26px;
+        }
+
+        /* Botones de acción */
+        .hud-actions {
+            margin-top: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .hud-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--ow-orange), #ff8c00);
+            color: var(--ow-dark);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(249, 158, 26, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--ow-white);
+            border: 2px solid var(--ow-blue);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 178, 255, 0.1);
+        }
+
+        /* Área de contenido principal */
+        .hud-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        /* Slideshow de estilos HUD */
+        .hud-slideshow {
+            background: rgba(28, 42, 68, 0.9);
+            border-radius: 15px;
+            border: 2px solid var(--ow-blue);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slideshow-title {
+            color: var(--ow-orange);
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .slideshow-container {
+            position: relative;
+            height: 400px;
+            margin-bottom: 2rem;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 3px solid var(--ow-blue);
+            background: var(--ow-dark);
+        }
+
+        .hud-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hud-slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        /* Simulación de HUD en juego - ESTILO MINIMALISTA */
+        .hud-preview {
+            width: 90%;
+            height: 85%;
+            position: relative;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        /* Elementos del HUD - Estilo minimalista por defecto */
+        .health-bar {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 180px;
+            height: 24px;
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid var(--hud-health);
+            border-radius: 4px;
+            overflow: hidden;
+            padding: 2px;
+        }
+
+        .health-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--hud-health), #66BB6A);
+            width: 75%;
+            border-radius: 2px;
+            transition: width 0.3s ease;
+        }
+
+        .health-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+
+        .ammo-counter {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.3rem;
+            color: var(--hud-primary);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            font-weight: 600;
+        }
+
+        .ability-icons {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 8px;
+        }
+
+        .ability-icon {
+            width: 42px;
+            height: 42px;
+            background: rgba(156, 39, 176, 0.2);
+            border: 1px solid var(--hud-secondary);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        .ability-icon.cooldown {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--ow-gray);
+            color: var(--ow-gray);
+        }
+
+        .kill-feed {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 180px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 4px;
+            padding: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: none; /* Oculto por defecto en estilo minimalista */
+        }
+
+        .kill-feed-item {
+            color: var(--ow-white);
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.8rem;
+            margin-bottom: 4px;
+            padding: 4px 6px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+            border-left: 2px solid var(--hud-primary);
+        }
+
+        .kill-feed.show {
+            display: block;
+        }
+
+        /* Crosshair minimalista */
+        .crosshair {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 50%;
+            display: none;
+        }
+
+        .crosshair.show {
+            display: block;
+        }
+
+        /* HUD Elements que pueden aparecer/desaparecer */
+        .hud-element {
+            transition: all 0.3s ease;
+        }
+
+        /* Controles del slideshow */
+        .slideshow-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .slide-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid var(--ow-blue);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            color: var(--ow-white);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slide-btn:hover {
+            background: var(--ow-blue);
+            transform: scale(1.1);
+        }
+
+        .slide-dots {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .slide-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--ow-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .slide-dot.active {
+            background: var(--ow-blue);
+            transform: scale(1.2);
+        }
+
+        /* Botón de selección de estilo */
+        .select-style-container {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .select-style-btn {
+            padding: 1rem 3rem;
+            background: linear-gradient(135deg, var(--ow-blue), #0088cc);
+            border: none;
+            border-radius: 8px;
+            color: var(--ow-dark);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 600;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 5px 15px rgba(0, 178, 255, 0.3);
+        }
+
+        .select-style-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0, 178, 255, 0.5);
+        }
+
+        .select-style-btn.selected {
+            background: linear-gradient(135deg, var(--ow-orange), #ff8c00);
+            transform: scale(1.05);
+            box-shadow: 0 0 25px rgba(249, 158, 26, 0.5);
+        }
+
+        /* Información del estilo seleccionado */
+        .selected-style-info {
+            background: rgba(0, 178, 255, 0.1);
+            border: 2px solid var(--ow-blue);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .selected-style-info.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .selected-title {
+            color: var(--ow-blue);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+        }
+
+        .selected-style-name {
+            color: var(--ow-orange);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .selected-style-desc {
+            color: var(--ow-gray);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Footer */
+        .site-footer {
+            background: rgba(9, 14, 26, 0.95);
+            border-top: 2px solid var(--ow-orange);
+            padding: 2rem 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: var(--ow-gray);
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-disclaimer {
+            color: var(--ow-gray);
+            font-family: 'Roboto', sans-serif;
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-top: 1rem;
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hud-container {
+                flex-direction: column;
+            }
+            
+            .hud-sidebar {
+                width: 100%;
+            }
+            
+            .slideshow-container {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .logo-container {
+                width: 120px;
+                height: 60px;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .slideshow-container {
+                height: 300px;
+            }
+            
+            .health-bar {
+                width: 140px;
+                height: 20px;
+            }
+            
+            .ammo-counter {
+                font-size: 1.1rem;
+            }
+            
+            .ability-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-container {
+                width: 100px;
+                height: 50px;
+            }
+            
+            .page-title {
+                font-size: 1.8rem;
+            }
+            
+            .hud-sidebar,
+            .hud-slideshow {
+                padding: 1.5rem;
+            }
+            
+            .slideshow-container {
+                height: 250px;
+            }
+            
+            .slide-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .health-bar {
+                width: 120px;
+                height: 18px;
+                top: 10px;
+                left: 10px;
+            }
+            
+            .kill-feed {
+                width: 140px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="simple-header">
+        <div class="header-content">
+            <!-- Logo izquierdo -->
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                    <img src="../media/images/backgrounds/Ow.png" alt="Logo Izquierdo" class="logo-image" >
+                </div>
+            </div>
+            
+            <!-- Navegación -->
+            <nav class="nav-center">
+                <ul class="nav-links">
+                    <li><a href="index.html" class="nav-link">INICIO</a></li>
+                    <li><a href="characters.html" class="nav-link">HÉROES</a></li>
+                    <li><a href="demo.html" class="nav-link">DEMO</a></li>
+                    <li><a href="hud.html" class="nav-link active">HUD</a></li>
+                    <li><a href="config.html" class="nav-link">CONFIGURACIÓN</a></li>
+                </ul>
+            </nav>
+            
+            <!-- Logo derecho -->
+            <div class="logo-container">
+                <div class="logo-placeholder">
+                    <img src="../media/images/backgrounds/Blizzard.png" alt="Logo Derecho" class="logo-image">
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <h1 class="page-title">PERSONALIZACIÓN DE HUD</h1>
+        <p class="page-subtitle">Configura y personaliza la interfaz de usuario en estilo pixel art</p>
+        
+        <div class="hud-container">
+            <!-- Panel lateral de personalización -->
+            <aside class="hud-sidebar">
+                <h2 class="sidebar-title">PERSONALIZACIÓN</h2>
+                
+                <!-- Selector de estilo HUD -->
+                <div class="hud-style">
+                    <h3 class="style-title">ESTILO HUD</h3>
+                    <div class="style-selectors">
+                        <button class="style-btn selected" data-style="minimalista">
+                            MINIMALISTA
                         </button>
-                        <button class="preview-btn" id="toggle-hud-elements">
-                            <span class="btn-icon">👁️</span>
-                            <span class="btn-text">Mostrar/Ocultar Todos</span>
+                        <button class="style-btn" data-style="clasico">
+                            CLÁSICO
+                        </button>
+                        <button class="style-btn" data-style="avanzado">
+                            AVANZADO
                         </button>
                     </div>
                 </div>
                 
-                <div class="hud-preview" id="hud-preview-area">
-                    <!-- Aquí se renderizan los elementos HUD -->
+                <!-- Tamaños y opacidad -->
+                <div class="custom-section">
+                    <h3 class="section-title">TAMAÑOS Y VISIBILIDAD</h3>
                     
-                    <!-- Barra de salud -->
-                    <div class="hud-element health-bar" data-element="health" style="top: 20px; left: 20px;">
-                        <div class="element-header">
-                            <span class="element-icon">❤️</span>
-                            <span class="element-name">SALUD</span>
-                            <button class="element-toggle">✓</button>
+                    <div class="custom-option">
+                        <div class="option-label">
+                            <span class="option-name">Tamaño del HUD</span>
+                            <span class="option-value" id="sizeValue">100%</span>
                         </div>
-                        <div class="element-content">
-                            <div class="health-container">
-                                <div class="health-fill" style="width: 85%"></div>
-                                <div class="health-text">850/1000</div>
-                            </div>
+                        <div class="slider-container">
+                            <input type="range" min="50" max="150" value="100" class="hud-slider" id="sizeSlider">
+                        </div>
+                    </div>
+                    
+                    <div class="custom-option">
+                        <div class="option-label">
+                            <span class="option-name">Opacidad</span>
+                            <span class="option-value" id="opacityValue">90%</span>
+                        </div>
+                        <div class="slider-container">
+                            <input type="range" min="20" max="100" value="90" class="hud-slider" id="opacitySlider">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Selector de colores -->
+                <div class="custom-section">
+                    <h3 class="section-title">COLORES</h3>
+                    
+                    <div class="custom-option">
+                        <div class="color-picker" id="healthColorPicker">
+                            <div class="color-preview" style="background: var(--hud-health);"></div>
+                            <span class="color-name">Color de Vida</span>
+                        </div>
+                    </div>
+                    
+                    <div class="custom-option">
+                        <div class="color-picker" id="abilityColorPicker">
+                            <div class="color-preview" style="background: var(--hud-secondary);"></div>
+                            <span class="color-name">Color de Habilidades</span>
                         </div>
                     </div>
 
-                    <!-- Barra de habilidad definitiva -->
-                    <div class="hud-element ultimate-bar" data-element="ultimate" style="top: 20px; right: 20px;">
-                        <div class="element-header">
-                            <span class="element-icon">⚡</span>
-                            <span class="element-name">DEFINITIVA</span>
-                            <button class="element-toggle">✓</button>
+                    <div class="custom-option">
+                        <div class="color-picker" id="ammoColorPicker">
+                            <div class="color-preview" style="background: var(--hud-primary);"></div>
+                            <span class="color-name">Color de Munición</span>
                         </div>
-                        <div class="element-content">
-                            <div class="ultimate-container">
-                                <div class="ultimate-fill" style="width: 60%"></div>
-                                <div class="ultimate-text">60%</div>
+                    </div>
+                </div>
+                
+                <!-- Toggles -->
+                <div class="custom-section">
+                    <h3 class="section-title">OPCIONES</h3>
+                    
+                    <div class="custom-option">
+                        <div class="toggle-container">
+                            <span class="toggle-label">Mostrar Kill Feed</span>
+                            <div class="toggle-switch" id="killFeedToggle">
+                                <div class="toggle-knob"></div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Habilidades -->
-                    <div class="hud-element abilities" data-element="abilities" style="bottom: 20px; left: 20px;">
-                        <div class="element-header">
-                            <span class="element-icon">🎯</span>
-                            <span class="element-name">HABILIDADES</span>
-                            <button class="element-toggle">✓</button>
+                    
+                    <div class="custom-option">
+                        <div class="toggle-container">
+                            <span class="toggle-label">Mostrar Crosshair</span>
+                            <div class="toggle-switch active" id="crosshairToggle">
+                                <div class="toggle-knob"></div>
+                            </div>
                         </div>
-                        <div class="element-content">
-                            <div class="abilities-container">
-                                <div class="ability-slot" data-ability="1">
-                                    <div class="ability-icon">Q</div>
-                                    <div class="ability-cooldown">3s</div>
+                    </div>
+                    
+                    <div class="custom-option">
+                        <div class="toggle-container">
+                            <span class="toggle-label">Números de Daño</span>
+                            <div class="toggle-switch" id="damageNumbersToggle">
+                                <div class="toggle-knob"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Botones de acción -->
+                <div class="hud-actions">
+                    <button class="hud-btn btn-primary" id="applyHud">
+                        APLICAR HUD
+                    </button>
+                    <button class="hud-btn btn-secondary" id="resetHud">
+                        RESTABLECER HUD
+                    </button>
+                </div>
+            </aside>
+
+            <!-- Área de contenido principal - Slideshow de estilos HUD -->
+            <div class="hud-content">
+                <section class="hud-slideshow">
+                    <h2 class="slideshow-title">PREVIEW DE ESTILOS HUD</h2>
+                    
+                    <!-- Slideshow Container -->
+                    <div class="slideshow-container">
+                        <!-- Estilo 1: Minimalista -->
+                        <div class="hud-slide active" data-style="minimalista">
+                            <div class="hud-preview">
+                                <div class="health-bar">
+                                    <div class="health-fill"></div>
+                                    <div class="health-text">750/1000</div>
                                 </div>
-                                <div class="ability-slot" data-ability="2">
+                                <div class="ammo-counter">30/150</div>
+                                <div class="ability-icons">
+                                    <div class="ability-icon cooldown">Q</div>
                                     <div class="ability-icon">E</div>
-                                    <div class="ability-cooldown">8s</div>
+                                    <div class="ability-icon">⇧</div>
                                 </div>
-                                <div class="ability-slot" data-ability="3">
-                                    <div class="ability-icon">Shift</div>
-                                    <div class="ability-cooldown active">Listo</div>
+                                <div class="kill-feed">
+                                    <div class="kill-feed-item">TRACER eliminó a GENJI</div>
+                                    <div class="kill-feed-item">MERCY revivió a REINHARDT</div>
                                 </div>
+                                <div class="crosshair"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Estilo 2: Clásico -->
+                        <div class="hud-slide" data-style="clasico">
+                            <div class="hud-preview">
+                                <div class="health-bar" style="border-color: #00b2ff; background: rgba(0, 178, 255, 0.1);">
+                                    <div class="health-fill" style="background: linear-gradient(90deg, #00b2ff, #66d9ff);"></div>
+                                    <div class="health-text">850/1000</div>
+                                </div>
+                                <div class="ammo-counter" style="color: #00b2ff; font-size: 1.5rem;">25/120</div>
+                                <div class="ability-icons">
+                                    <div class="ability-icon" style="background: rgba(0, 178, 255, 0.2); border-color: #00b2ff;">1</div>
+                                    <div class="ability-icon" style="background: rgba(0, 178, 255, 0.2); border-color: #00b2ff;">2</div>
+                                    <div class="ability-icon" style="background: rgba(0, 178, 255, 0.2); border-color: #00b2ff;">3</div>
+                                </div>
+                                <div class="kill-feed show" style="border-left-color: #00b2ff;">
+                                    <div class="kill-feed-item" style="color: #00b2ff;">GENJI eliminó a MERCY</div>
+                                    <div class="kill-feed-item" style="color: #00b2ff;">REAPER eliminó a WINSTON</div>
+                                </div>
+                                <div class="crosshair show" style="background: #00b2ff;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- Estilo 3: Avanzado -->
+                        <div class="hud-slide" data-style="avanzado">
+                            <div class="hud-preview">
+                                <div class="health-bar" style="width: 220px; height: 28px; border-color: #9C27B0; background: rgba(156, 39, 176, 0.1);">
+                                    <div class="health-fill" style="background: linear-gradient(90deg, #9C27B0, #BA68C8);"></div>
+                                    <div class="health-text">920/1000</div>
+                                </div>
+                                <div class="ammo-counter" style="color: #9C27B0; font-size: 1.6rem; text-shadow: 0 0 8px rgba(156, 39, 176, 0.5);">18/90</div>
+                                <div class="ability-icons">
+                                    <div class="ability-icon" style="background: rgba(156, 39, 176, 0.3); border-color: #9C27B0; width: 48px; height: 48px;">SHIFT</div>
+                                    <div class="ability-icon" style="background: rgba(156, 39, 176, 0.3); border-color: #9C27B0; width: 48px; height: 48px;">E</div>
+                                    <div class="ability-icon" style="background: rgba(156, 39, 176, 0.3); border-color: #9C27B0; width: 48px; height: 48px;">ULT</div>
+                                </div>
+                                <div class="kill-feed show" style="width: 220px; border-left-color: #9C27B0;">
+                                    <div class="kill-feed-item" style="color: #9C27B0; font-weight: bold;">⭐ TRACER eliminó a GENJI</div>
+                                    <div class="kill-feed-item" style="color: #9C27B0;">MERCY: Asistencia +150</div>
+                                    <div class="kill-feed-item" style="color: #9C27B0;">OBJETIVO: 85%</div>
+                                </div>
+                                <div class="crosshair show" style="background: #9C27B0; width: 6px; height: 6px; box-shadow: 0 0 8px rgba(156, 39, 176, 0.8);"></div>
                             </div>
                         </div>
                     </div>
-
-                    <!-- Munición -->
-                    <div class="hud-element ammo" data-element="ammo" style="bottom: 20px; right: 20px;">
-                        <div class="element-header">
-                            <span class="element-icon">🔫</span>
-                            <span class="element-name">MUNICIÓN</span>
-                            <button class="element-toggle">✓</button>
+                    
+                    <!-- Controles del Slideshow -->
+                    <div class="slideshow-controls">
+                        <button class="slide-btn prev">←</button>
+                        <div class="slide-dots">
+                            <div class="slide-dot active" data-index="0"></div>
+                            <div class="slide-dot" data-index="1"></div>
+                            <div class="slide-dot" data-index="2"></div>
                         </div>
-                        <div class="element-content">
-                            <div class="ammo-container">
-                                <div class="ammo-current">24</div>
-                                <div class="ammo-separator">/</div>
-                                <div class="ammo-total">120</div>
-                            </div>
-                        </div>
+                        <button class="slide-btn next">→</button>
                     </div>
-
-                    <!-- Minimapa -->
-                    <div class="hud-element minimap" data-element="minimap" style="top: 50%; right: 20px; transform: translateY(-50%);">
-                        <div class="element-header">
-                            <span class="element-icon">🗺️</span>
-                            <span class="element-name">MINIMAPA</span>
-                            <button class="element-toggle">✓</button>
-                        </div>
-                        <div class="element-content">
-                            <div class="minimap-display">
-                                <div class="map-grid"></div>
-                                <div class="player-marker"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Información de equipo -->
-                    <div class="hud-element team-info" data-element="team" style="left: 20px; top: 50%; transform: translateY(-50%);">
-                        <div class="element-header">
-                            <span class="element-icon">👥</span>
-                            <span class="element-name">EQUIPO</span>
-                            <button class="element-toggle">✓</button>
-                        </div>
-                        <div class="element-content">
-                            <div class="team-container">
-                                <div class="team-member active">
-                                    <div class="member-health">100%</div>
-                                    <div class="member-name">Tracer</div>
-                                </div>
-                                <div class="team-member">
-                                    <div class="member-health">75%</div>
-                                    <div class="member-name">Mercy</div>
-                                </div>
-                                <div class="team-member">
-                                    <div class="member-health">50%</div>
-                                    <div class="member-name">Winston</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="preview-actions">
-                    <button class="action-btn test-btn" id="test-hud">
-                        <span class="btn-icon">▶️</span>
-                        <span class="btn-text">PROBAR HUD</span>
-                    </button>
-                    <button class="action-btn save-btn" id="save-hud">
-                        <span class="btn-icon">💾</span>
-                        <span class="btn-text">GUARDAR CONFIGURACIÓN</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Panel de controles -->
-            <div class="hud-controls-panel">
-                <div class="controls-header">
-                    <h3 class="controls-title">CONTROLES DE PERSONALIZACIÓN</h3>
-                    <p class="controls-subtitle">Arrastra los elementos y ajusta su apariencia</p>
-                </div>
-
-                <!-- Navegación de elementos -->
-                <div class="elements-navigation">
-                    <div class="elements-tabs">
-                        <button class="element-tab active" data-tab="position">POSICIÓN</button>
-                        <button class="element-tab" data-tab="appearance">APARIENCIA</button>
-                        <button class="element-tab" data-tab="behavior">COMPORTAMIENTO</button>
-                    </div>
-
-                    <!-- Contenido de las pestañas -->
-                    <div class="elements-content">
-                        <!-- Pestaña Posición -->
-                        <div class="tab-content active" id="position-tab">
-                            <div class="position-controls">
-                                <div class="control-group">
-                                    <h4 class="control-title">ELEMENTO SELECCIONADO</h4>
-                                    <select class="element-selector" id="element-selector">
-                                        <option value="health">Barra de Salud</option>
-                                        <option value="ultimate">Barra de Definitiva</option>
-                                        <option value="abilities">Habilidades</option>
-                                        <option value="ammo">Munición</option>
-                                        <option value="minimap">Minimapa</option>
-                                        <option value="team">Información de Equipo</option>
-                                    </select>
-                                </div>
-
-                                <div class="control-group">
-                                    <h4 class="control-title">POSICIÓN</h4>
-                                    <div class="position-inputs">
-                                        <div class="input-group">
-                                            <label class="input-label">X (px)</label>
-                                            <input type="number" class="pixel-input" id="pos-x" min="0" max="1000" value="20">
-                                        </div>
-                                        <div class="input-group">
-                                            <label class="input-label">Y (px)</label>
-                                            <input type="number" class="pixel-input" id="pos-y" min="0" max="1000" value="20">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <h4 class="control-title">TAMAÑO</h4>
-                                    <div class="size-controls">
-                                        <div class="slider-control">
-                                            <label class="slider-label">Ancho: <span id="width-value">200px</span></label>
-                                            <input type="range" min="100" max="500" value="200" class="pixel-slider" id="width-slider">
-                                        </div>
-                                        <div class="slider-control">
-                                            <label class="slider-label">Alto: <span id="height-value">80px</span></label>
-                                            <input type="range" min="50" max="300" value="80" class="pixel-slider" id="height-slider">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <h4 class="control-title">PRESETS DE POSICIÓN</h4>
-                                    <div class="position-presets">
-                                        <button class="preset-btn" data-preset="default">Por Defecto</button>
-                                        <button class="preset-btn" data-preset="minimal">Mínimo</button>
-                                        <button class="preset-btn" data-preset="pro">Competitivo</button>
-                                        <button class="preset-btn" data-preset="custom">Personalizado</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pestaña Apariencia -->
-                        <div class="tab-content" id="appearance-tab">
-                            <div class="appearance-controls">
-                                <div class="control-group">
-                                    <h4 class="control-title">COLORES</h4>
-                                    <div class="color-pickers">
-                                        <div class="color-picker">
-                                            <label class="color-label">Color Principal</label>
-                                            <input type="color" class="color-input" id="primary-color" value="#FF9C00">
-                                            <span class="color-value" id="primary-color-value">#FF9C00</span>
-                                        </div>
-                                        <div class="color-picker">
-                                            <label class="color-label">Color Secundario</label>
-                                            <input type="color" class="color-input" id="secondary-color" value="#FFE600">
-                                            <span class="color-value" id="secondary-color-value">#FFE600</span>
-                                        </div>
-                                        <div class="color-picker">
-                                            <label class="color-label">Fondo</label>
-                                            <input type="color" class="color-input" id="background-color" value="#1A1A1A">
-                                            <span class="color-value" id="background-color-value">#1A1A1A</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <h4 class="control-title">OPACIDAD</h4>
-                                    <div class="opacity-controls">
-                                        <div class="slider-control">
-                                            <label class="slider-label">Opacidad: <span id="opacity-value">90%</span></label>
-                                            <input type="range" min="10" max="100" value="90" class="pixel-slider" id="opacity-slider">
-                                        </div>
-                                        <div class="checkbox-group">
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="hover-opacity" checked>
-                                                <span class="pixel-checkbox"></span>
-                                                Cambiar opacidad al pasar el cursor
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <h4 class="control-title">BORDES Y SOMBRAS</h4>
-                                    <div class="border-controls">
-                                        <div class="slider-control">
-                                            <label class="slider-label">Grosor del borde: <span id="border-value">2px</span></label>
-                                            <input type="range" min="0" max="10" value="2" class="pixel-slider" id="border-slider">
-                                        </div>
-                                        <div class="checkbox-group">
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="shadow-toggle" checked>
-                                                <span class="pixel-checkbox"></span>
-                                                Sombra
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Pestaña Comportamiento -->
-                        <div class="tab-content" id="behavior-tab">
-                            <div class="behavior-controls">
-                                <div class="control-group">
-                                    <h4 class="control-title">VISIBILIDAD</h4>
-                                    <div class="visibility-controls">
-                                        <div class="checkbox-group">
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="always-visible" checked>
-                                                <span class="pixel-checkbox"></span>
-                                                Siempre visible
-                                            </label>
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="hide-in-combat">
-                                                <span class="pixel-checkbox"></span>
-                                                Ocultar en combate
-                                            </label>
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="show-on-hover">
-                                                <span class="pixel-checkbox"></span>
-                                                Mostrar al pasar el cursor
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <h4 class="control-title">ANIMACIONES</h4>
-                                    <div class="animation-controls">
-                                        <div class="checkbox-group">
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="damage-animation" checked>
-                                                <span class="pixel-checkbox"></span>
-                                                Animación al recibir daño
-                                            </label>
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="low-health-animation" checked>
-                                                <span class="pixel-checkbox"></span>
-                                                Animación de salud baja
-                                            </label>
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="ability-animation" checked>
-                                                <span class="pixel-checkbox"></span>
-                                                Animación de habilidades
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="control-group">
-                                    <h4 class="control-title">SONIDOS</h4>
-                                    <div class="sound-controls">
-                                        <div class="checkbox-group">
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="low-health-sound" checked>
-                                                <span class="pixel-checkbox"></span>
-                                                Sonido de salud baja
-                                            </label>
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="ability-ready-sound" checked>
-                                                <span class="pixel-checkbox"></span>
-                                                Sonido de habilidad lista
-                                            </label>
-                                            <label class="checkbox-label">
-                                                <input type="checkbox" id="ultimate-ready-sound" checked>
-                                                <span class="pixel-checkbox"></span>
-                                                Sonido de definitiva lista
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Configuración rápida -->
-                <div class="quick-settings">
-                    <h4 class="quick-title">CONFIGURACIÓN RÁPIDA</h4>
-                    <div class="quick-buttons">
-                        <button class="quick-btn" id="toggle-all-hud">
-                            <span class="btn-icon">👁️</span>
-                            <span>Mostrar/Ocultar Todo</span>
-                        </button>
-                        <button class="quick-btn" id="reset-hud-appearance">
-                            <span class="btn-icon">🔄</span>
-                            <span>Reiniciar Apariencia</span>
-                        </button>
-                        <button class="quick-btn" id="export-hud">
-                            <span class="btn-icon">📤</span>
-                            <span>Exportar Configuración</span>
-                        </button>
-                        <button class="quick-btn" id="import-hud">
-                            <span class="btn-icon">📥</span>
-                            <span>Importar Configuración</span>
+                    
+                    <!-- Botón de selección -->
+                    <div class="select-style-container">
+                        <button class="select-style-btn" id="selectStyleBtn">
+                            SELECCIONAR MINIMALISTA
                         </button>
                     </div>
-                </div>
+                    
+                    <!-- Información del estilo seleccionado -->
+                    <div class="selected-style-info" id="selectedStyleInfo">
+                        <h3 class="selected-title">ESTILO HUD SELECCIONADO</h3>
+                        <div class="selected-style-name" id="selectedStyleName">MINIMALISTA</div>
+                        <p class="selected-style-desc" id="selectedStyleDesc">
+                            Interfaz minimalista que reduce el desorden visual. Muestra solo la información esencial: 
+                            vida, munición y habilidades básicas. Perfecto para jugadores que prefieren una pantalla 
+                            limpia sin distracciones.
+                        </p>
+                    </div>
+                </section>
             </div>
         </div>
+    </main>
 
-        <!-- Información de estado -->
-        <div class="hud-status">
-            <div class="status-info">
-                <span class="status-label">ESTADO:</span>
-                <span class="status-value" id="hud-status-value">Configuración activa</span>
-            </div>
-            <div class="status-actions">
-                <button class="status-btn apply-btn" id="apply-hud">
-                    <span class="btn-icon">✓</span>
-                    <span class="btn-text">APLICAR CAMBIOS</span>
-                </button>
-                <button class="status-btn cancel-btn" id="cancel-hud">
-                    <span class="btn-icon">✕</span>
-                    <span class="btn-text">CANCELAR</span>
-                </button>
-            </div>
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="footer-content">
+            <p class="footer-text">OVERWATCH 2 PIXEL ART EDITION - Personalización de HUD</p>
+            <p class="footer-text">Universidad de Diseño y Tecnología</p>
+            <p class="footer-disclaimer">Este es un proyecto de demostración. Overwatch 2 es una marca registrada de Blizzard Entertainment.</p>
         </div>
-    </div>
+    </footer>
 
-    <!-- Scripts -->
-    <script src="js/main.js"></script>
-    <script src="js/hud-customization.js"></script>
+    <script>
+        // Variables globales
+        let currentSlide = 0;
+        let currentStyle = 'minimalista';
+        let currentHealthColor = '#4CAF50';
+        let currentAbilityColor = '#9C27B0';
+        let currentAmmoColor = '#2196F3';
+        
+        const slides = document.querySelectorAll('.hud-slide');
+        const dots = document.querySelectorAll('.slide-dot');
+        const styleButtons = document.querySelectorAll('.style-btn');
+        const selectStyleBtn = document.getElementById('selectStyleBtn');
+        const selectedStyleInfo = document.getElementById('selectedStyleInfo');
+        const selectedStyleName = document.getElementById('selectedStyleName');
+        const selectedStyleDesc = document.getElementById('selectedStyleDesc');
+        
+        // Datos de descripción de estilos HUD
+        const styleDescriptions = {
+            'minimalista': {
+                name: 'MINIMALISTA',
+                desc: 'Interfaz minimalista que reduce el desorden visual. Muestra solo la información esencial: vida, munición y habilidades básicas. Perfecto para jugadores que prefieren una pantalla limpia sin distracciones.'
+            },
+            'clasico': {
+                name: 'CLÁSICO',
+                desc: 'Recrea el HUD clásico de Overwatch con elementos familiares para jugadores veteranos. Mantiene la esencia original con colores azules distintivos y disposición tradicional.'
+            },
+            'avanzado': {
+                name: 'AVANZADO',
+                desc: 'HUD avanzado que muestra información detallada como estadísticas de daño, tiempo de enfriamiento preciso y feed de eventos completo. Ideal para jugadores competitivos.'
+            }
+        };
+
+        // ========== INICIALIZACIÓN ==========
+        function init() {
+            // Inicializar slideshow
+            showSlide(0);
+            
+            // Event listeners para controles del slideshow
+            document.querySelector('.slide-btn.prev').addEventListener('click', prevSlide);
+            document.querySelector('.slide-btn.next').addEventListener('click', nextSlide);
+            
+            // Event listeners para dots
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => showSlide(index));
+            });
+            
+            // Event listeners para botones de estilo
+            styleButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    selectStyle(this.dataset.style);
+                });
+            });
+            
+            // Event listener para botón de selección
+            selectStyleBtn.addEventListener('click', function() {
+                selectStyle(currentStyle);
+            });
+            
+            // Configurar sliders
+            setupSliders();
+            
+            // Configurar color pickers
+            setupColorPickers();
+            
+            // Configurar toggles
+            setupToggles();
+            
+            // Configurar botones de acción
+            setupActionButtons();
+            
+            // Configurar navegación por teclado
+            setupKeyboardNavigation();
+            
+            // Iniciar rotación automática
+            startAutoRotate();
+        }
+
+        // ========== SLIDESHOW FUNCTIONS ==========
+        function showSlide(index) {
+            // Ocultar todas las slides
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            
+            // Mostrar slide actual
+            slides[index].classList.add('active');
+            dots[index].classList.add('active');
+            
+            // Actualizar estilo actual basado en la slide
+            currentSlide = index;
+            currentStyle = slides[index].dataset.style;
+            
+            // Actualizar botones de estilo
+            updateStyleButtons();
+            
+            // Actualizar botón de selección
+            updateSelectButton();
+            
+            // Aplicar cambios visuales al preview actual
+            applyVisualChanges();
+        }
+
+        function nextSlide() {
+            let nextIndex = (currentSlide + 1) % slides.length;
+            showSlide(nextIndex);
+        }
+
+        function prevSlide() {
+            let prevIndex = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(prevIndex);
+        }
+
+        // ========== STYLE SELECTION FUNCTIONS ==========
+        function updateStyleButtons() {
+            styleButtons.forEach(btn => {
+                if (btn.dataset.style === currentStyle) {
+                    btn.classList.add('selected');
+                } else {
+                    btn.classList.remove('selected');
+                }
+            });
+        }
+
+        function updateSelectButton() {
+            const styleData = styleDescriptions[currentStyle];
+            selectStyleBtn.textContent = `SELECCIONAR ${styleData.name}`;
+            selectStyleBtn.dataset.style = currentStyle;
+        }
+
+        function selectStyle(styleName) {
+            // Encontrar el índice de la slide correspondiente al estilo
+            let slideIndex = Array.from(slides).findIndex(slide => 
+                slide.dataset.style === styleName
+            );
+            
+            if (slideIndex !== -1) {
+                showSlide(slideIndex);
+            }
+            
+            // Mostrar información del estilo seleccionado
+            const styleData = styleDescriptions[styleName];
+            selectedStyleName.textContent = styleData.name;
+            selectedStyleDesc.textContent = styleData.desc;
+            selectedStyleInfo.classList.add('active');
+            
+            // Resaltar el botón de selección
+            selectStyleBtn.classList.add('selected');
+            setTimeout(() => {
+                selectStyleBtn.classList.remove('selected');
+            }, 1000);
+        }
+
+        // ========== CUSTOMIZATION FUNCTIONS ==========
+        function setupSliders() {
+            const sizeSlider = document.getElementById('sizeSlider');
+            const opacitySlider = document.getElementById('opacitySlider');
+            const sizeValue = document.getElementById('sizeValue');
+            const opacityValue = document.getElementById('opacityValue');
+            
+            // Actualizar valores iniciales
+            sizeValue.textContent = `${sizeSlider.value}%`;
+            opacityValue.textContent = `${opacitySlider.value}%`;
+            
+            sizeSlider.addEventListener('input', function() {
+                sizeValue.textContent = `${this.value}%`;
+                applySizeChange(this.value);
+            });
+            
+            opacitySlider.addEventListener('input', function() {
+                opacityValue.textContent = `${this.value}%`;
+                applyOpacityChange(this.value);
+            });
+        }
+
+        function setupColorPickers() {
+            // Health color picker
+            document.getElementById('healthColorPicker').addEventListener('click', function() {
+                const newColor = prompt('Ingresa el color para la barra de vida (hexadecimal):', currentHealthColor);
+                if (newColor && /^#[0-9A-F]{6}$/i.test(newColor)) {
+                    currentHealthColor = newColor;
+                    updateColorPreviews();
+                    applyColorChanges();
+                }
+            });
+            
+            // Ability color picker
+            document.getElementById('abilityColorPicker').addEventListener('click', function() {
+                const newColor = prompt('Ingresa el color para las habilidades (hexadecimal):', currentAbilityColor);
+                if (newColor && /^#[0-9A-F]{6}$/i.test(newColor)) {
+                    currentAbilityColor = newColor;
+                    updateColorPreviews();
+                    applyColorChanges();
+                }
+            });
+            
+            // Ammo color picker
+            document.getElementById('ammoColorPicker').addEventListener('click', function() {
+                const newColor = prompt('Ingresa el color para la munición (hexadecimal):', currentAmmoColor);
+                if (newColor && /^#[0-9A-F]{6}$/i.test(newColor)) {
+                    currentAmmoColor = newColor;
+                    updateColorPreviews();
+                    applyColorChanges();
+                }
+            });
+        }
+
+        function updateColorPreviews() {
+            document.querySelector('#healthColorPicker .color-preview').style.background = currentHealthColor;
+            document.querySelector('#abilityColorPicker .color-preview').style.background = currentAbilityColor;
+            document.querySelector('#ammoColorPicker .color-preview').style.background = currentAmmoColor;
+        }
+
+        function setupToggles() {
+            const killFeedToggle = document.getElementById('killFeedToggle');
+            const crosshairToggle = document.getElementById('crosshairToggle');
+            const damageNumbersToggle = document.getElementById('damageNumbersToggle');
+            
+            killFeedToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const showKillFeed = this.classList.contains('active');
+                applyKillFeedVisibility(showKillFeed);
+            });
+            
+            crosshairToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const showCrosshair = this.classList.contains('active');
+                applyCrosshairVisibility(showCrosshair);
+            });
+            
+            damageNumbersToggle.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const showDamageNumbers = this.classList.contains('active');
+                if (showDamageNumbers) {
+                    showDamageNumbersEffect();
+                }
+            });
+        }
+
+        function setupActionButtons() {
+            const applyBtn = document.getElementById('applyHud');
+            const resetBtn = document.getElementById('resetHud');
+            
+            applyBtn.addEventListener('click', function() {
+                showFeedback('✅ Configuración de HUD aplicada exitosamente!', 'success');
+                
+                // Guardar configuración (simulado)
+                const config = {
+                    style: currentStyle,
+                    size: document.getElementById('sizeSlider').value,
+                    opacity: document.getElementById('opacitySlider').value,
+                    colors: {
+                        health: currentHealthColor,
+                        ability: currentAbilityColor,
+                        ammo: currentAmmoColor
+                    },
+                    showKillFeed: document.getElementById('killFeedToggle').classList.contains('active'),
+                    showCrosshair: document.getElementById('crosshairToggle').classList.contains('active')
+                };
+                
+                console.log('Configuración guardada:', config);
+            });
+            
+            resetBtn.addEventListener('click', function() {
+                if (confirm('¿Restablecer toda la configuración de HUD a valores por defecto?')) {
+                    // Restablecer sliders
+                    document.getElementById('sizeSlider').value = 100;
+                    document.getElementById('opacitySlider').value = 90;
+                    document.getElementById('sizeValue').textContent = '100%';
+                    document.getElementById('opacityValue').textContent = '90%';
+                    
+                    // Restablecer colores
+                    currentHealthColor = '#4CAF50';
+                    currentAbilityColor = '#9C27B0';
+                    currentAmmoColor = '#2196F3';
+                    updateColorPreviews();
+                    
+                    // Restablecer toggles
+                    document.getElementById('killFeedToggle').classList.remove('active');
+                    document.getElementById('crosshairToggle').classList.add('active');
+                    document.getElementById('damageNumbersToggle').classList.remove('active');
+                    
+                    // Volver al estilo minimalista
+                    selectStyle('minimalista');
+                    
+                    // Aplicar cambios
+                    applyVisualChanges();
+                    
+                    showFeedback('✅ HUD restablecido a configuración por defecto', 'success');
+                }
+            });
+        }
+
+        // ========== VISUAL CHANGES FUNCTIONS ==========
+        function applyVisualChanges() {
+            applyColorChanges();
+            applySizeChange(document.getElementById('sizeSlider').value);
+            applyOpacityChange(document.getElementById('opacitySlider').value);
+            applyKillFeedVisibility(document.getElementById('killFeedToggle').classList.contains('active'));
+            applyCrosshairVisibility(document.getElementById('crosshairToggle').classList.contains('active'));
+        }
+
+        function applyColorChanges() {
+            const currentPreview = document.querySelector('.hud-slide.active .hud-preview');
+            if (!currentPreview) return;
+            
+            // Aplicar colores a la barra de vida
+            const healthBar = currentPreview.querySelector('.health-bar');
+            const healthFill = currentPreview.querySelector('.health-fill');
+            if (healthBar) {
+                healthBar.style.borderColor = currentHealthColor;
+                healthBar.style.background = `${currentHealthColor}20`;
+            }
+            if (healthFill) {
+                healthFill.style.background = `linear-gradient(90deg, ${currentHealthColor}, ${lightenColor(currentHealthColor, 20)})`;
+            }
+            
+            // Aplicar colores a los iconos de habilidades
+            const abilityIcons = currentPreview.querySelectorAll('.ability-icon:not(.cooldown)');
+            abilityIcons.forEach(icon => {
+                icon.style.borderColor = currentAbilityColor;
+                icon.style.background = `${currentAbilityColor}30`;
+            });
+            
+            // Aplicar color a la munición
+            const ammoCounter = currentPreview.querySelector('.ammo-counter');
+            if (ammoCounter) {
+                ammoCounter.style.color = currentAmmoColor;
+            }
+            
+            // Aplicar color al crosshair
+            const crosshair = currentPreview.querySelector('.crosshair');
+            if (crosshair) {
+                crosshair.style.background = currentAmmoColor;
+            }
+            
+            // Aplicar color al kill feed
+            const killFeedItems = currentPreview.querySelectorAll('.kill-feed-item');
+            killFeedItems.forEach(item => {
+                item.style.borderLeftColor = currentAmmoColor;
+                item.style.color = currentAmmoColor;
+            });
+        }
+
+        function applySizeChange(sizePercent) {
+            const currentPreview = document.querySelector('.hud-slide.active .hud-preview');
+            if (!currentPreview) return;
+            
+            const scale = sizePercent / 100;
+            currentPreview.style.transform = `scale(${scale})`;
+            currentPreview.style.transformOrigin = 'center';
+        }
+
+        function applyOpacityChange(opacityPercent) {
+            const currentPreview = document.querySelector('.hud-slide.active .hud-preview');
+            if (!currentPreview) return;
+            
+            const opacity = opacityPercent / 100;
+            currentPreview.style.opacity = opacity;
+        }
+
+        function applyKillFeedVisibility(show) {
+            const currentPreview = document.querySelector('.hud-slide.active .hud-preview');
+            if (!currentPreview) return;
+            
+            const killFeed = currentPreview.querySelector('.kill-feed');
+            if (killFeed) {
+                if (show) {
+                    killFeed.classList.add('show');
+                } else {
+                    killFeed.classList.remove('show');
+                }
+            }
+        }
+
+        function applyCrosshairVisibility(show) {
+            const currentPreview = document.querySelector('.hud-slide.active .hud-preview');
+            if (!currentPreview) return;
+            
+            const crosshair = currentPreview.querySelector('.crosshair');
+            if (crosshair) {
+                if (show) {
+                    crosshair.classList.add('show');
+                } else {
+                    crosshair.classList.remove('show');
+                }
+            }
+        }
+
+        function showDamageNumbersEffect() {
+            const currentPreview = document.querySelector('.hud-slide.active .hud-preview');
+            if (!currentPreview) return;
+            
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const damageNumber = document.createElement('div');
+                    damageNumber.className = 'damage-number';
+                    damageNumber.textContent = Math.floor(Math.random() * 200) + 50;
+                    damageNumber.style.position = 'absolute';
+                    damageNumber.style.color = currentAmmoColor;
+                    damageNumber.style.fontWeight = 'bold';
+                    damageNumber.style.fontSize = '16px';
+                    damageNumber.style.textShadow = '1px 1px 2px rgba(0, 0, 0, 0.8)';
+                    damageNumber.style.left = `${40 + i * 20}%`;
+                    damageNumber.style.top = '40%';
+                    damageNumber.style.opacity = '1';
+                    damageNumber.style.zIndex = '100';
+                    
+                    currentPreview.appendChild(damageNumber);
+                    
+                    // Animación
+                    let posY = 40;
+                    const animation = setInterval(() => {
+                        posY -= 1;
+                        damageNumber.style.top = `${posY}%`;
+                        damageNumber.style.opacity = (posY - 30) / 10;
+                        
+                        if (posY < 30) {
+                            damageNumber.remove();
+                            clearInterval(animation);
+                        }
+                    }, 30);
+                }, i * 200);
+            }
+        }
+
+        // ========== HELPER FUNCTIONS ==========
+        function lightenColor(color, percent) {
+            const num = parseInt(color.replace("#", ""), 16);
+            const amt = Math.round(2.55 * percent);
+            const R = (num >> 16) + amt;
+            const G = (num >> 8 & 0x00FF) + amt;
+            const B = (num & 0x0000FF) + amt;
+            return "#" + (
+                0x1000000 + 
+                (R < 255 ? R < 1 ? 0 : R : 255) * 0x10000 + 
+                (G < 255 ? G < 1 ? 0 : G : 255) * 0x100 + 
+                (B < 255 ? B < 1 ? 0 : B : 255)
+            ).toString(16).slice(1);
+        }
+
+        function showFeedback(message, type) {
+            const feedback = document.createElement('div');
+            feedback.textContent = message;
+            feedback.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? 'rgba(76, 175, 80, 0.9)' : 'rgba(244, 67, 54, 0.9)'};
+                color: white;
+                padding: 15px 25px;
+                border-radius: 10px;
+                z-index: 10000;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                font-family: 'Oswald', sans-serif;
+                font-weight: bold;
+                transform: translateX(100%);
+                transition: transform 0.3s ease;
+            `;
+            
+            document.body.appendChild(feedback);
+            
+            setTimeout(() => {
+                feedback.style.transform = 'translateX(0)';
+            }, 10);
+            
+            setTimeout(() => {
+                feedback.style.transform = 'translateX(100%)';
+                setTimeout(() => feedback.remove(), 300);
+            }, 3000);
+        }
+
+        // ========== KEYBOARD NAVIGATION ==========
+        function setupKeyboardNavigation() {
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowRight') nextSlide();
+                if (e.key === 'ArrowLeft') prevSlide();
+                if (e.key === ' ') selectStyle(currentStyle);
+            });
+        }
+
+        // ========== AUTO ROTATE ==========
+        function startAutoRotate() {
+            setInterval(() => {
+                nextSlide();
+            }, 8000);
+        }
+
+        // Inicializar cuando el DOM esté cargado
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
 </body>
 </html>

@@ -1,0 +1,314 @@
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    /* ... (mantener el código existente) ... */
+    
+    /* Characters Page - Slideshow para tablet */
+    .characters-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .skin-slideshow-container {
+        position: relative;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+    
+    .skin-slideshow {
+        height: 350px;
+        border-radius: 12px;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .skin-slide {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: none;
+        transition: opacity 0.5s ease;
+    }
+    
+    .skin-slide.active {
+        display: block;
+    }
+    
+    .slideshow-controls {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+    
+    .slide-btn {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: var(--ow-dark-gray);
+        border: 2px solid var(--neon-blue);
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .slide-btn:hover {
+        background: var(--neon-blue);
+        transform: scale(1.1);
+    }
+    
+    .skin-dots {
+        display: flex;
+        justify-content: center;
+        gap: 0.8rem;
+        margin-top: 1rem;
+    }
+    
+    .skin-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--ow-light-gray);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .skin-dot.active {
+        background: var(--neon-blue);
+        transform: scale(1.2);
+    }
+    
+    .character-info {
+        padding: 1.5rem;
+    }
+}
+
+/* Mobile (hasta 768px) */
+@media (max-width: 768px) {
+    /* ... (mantener el código existente) ... */
+    
+    /* Characters Page - Slideshow para móvil */
+    .skin-slideshow-container {
+        max-width: 100%;
+        margin: 1rem 0;
+    }
+    
+    .skin-slideshow {
+        height: 280px;
+    }
+    
+    .skin-slide {
+        object-position: center;
+    }
+    
+    .slideshow-controls {
+        gap: 0.8rem;
+        margin-top: 1rem;
+    }
+    
+    .slide-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .skin-dots {
+        gap: 0.6rem;
+        margin-top: 0.8rem;
+    }
+    
+    .skin-dot {
+        width: 10px;
+        height: 10px;
+    }
+    
+    .character-info {
+        padding: 1rem;
+    }
+    
+    /* Ajustar grid de personajes para móvil */
+    .characters-list {
+        max-height: 150px;
+        flex-direction: row;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0.5rem;
+        gap: 0.8rem;
+    }
+    
+    .hero-item {
+        min-width: 130px;
+        padding: 0.8rem;
+        flex-shrink: 0;
+    }
+    
+    .avatar-frame {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+    /* ... (mantener el código existente) ... */
+    
+    /* Characters Page - Slideshow para pantallas muy pequeñas */
+    .skin-slideshow {
+        height: 220px;
+    }
+    
+    .slide-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 0.8rem;
+    }
+    
+    .slideshow-controls {
+        gap: 0.5rem;
+    }
+    
+    .hero-item {
+        min-width: 110px;
+        padding: 0.6rem;
+    }
+    
+    .hero-name {
+        font-size: 0.9rem;
+    }
+    
+    .skin-name {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .skin-description {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+}
+
+/* Orientación landscape para móviles */
+@media (max-width: 768px) and (orientation: landscape) {
+    /* ... (mantener el código existente) ... */
+    
+    /* Characters Page - Slideshow en landscape */
+    .skin-slideshow {
+        height: 200px;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+    
+    .characters-main {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+    
+    .skin-slideshow-container {
+        order: 2;
+    }
+    
+    .character-info {
+        order: 1;
+    }
+}
+
+/* Tablets en orientación portrait */
+@media (max-width: 1024px) and (orientation: portrait) {
+    /* ... (mantener el código existente) ... */
+    
+    /* Characters Page - Slideshow para tablet portrait */
+    .skin-slideshow {
+        height: 400px;
+    }
+    
+    .characters-main {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .slideshow-controls {
+        margin-top: 2rem;
+    }
+}
+
+/* Desktop grande (más de 1400px) */
+@media (min-width: 1400px) {
+    /* ... (mantener el código existente) ... */
+    
+    /* Characters Page - Slideshow para desktop grande */
+    .skin-slideshow {
+        height: 500px;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .skin-slideshow-container {
+        position: relative;
+    }
+    
+    .slide-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+        z-index: 10;
+    }
+    
+    .slide-btn.prev {
+        left: 20px;
+    }
+    
+    .slide-btn.next {
+        right: 20px;
+    }
+    
+    .slideshow-controls .slide-btn {
+        position: static;
+        transform: none;
+    }
+    
+    .skin-dots {
+        margin-top: 1.5rem;
+    }
+    
+    .skin-dot {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .skin-dot:hover {
+        transform: scale(1.3);
+    }
+}
+
+/* Ajustes para modo táctil */
+@media (hover: none) and (pointer: coarse) {
+    .slide-btn {
+        min-width: 50px;
+        min-height: 50px;
+    }
+    
+    .skin-dot {
+        min-width: 16px;
+        min-height: 16px;
+    }
+    
+    .hero-item {
+        min-width: 140px;
+        padding: 1rem;
+    }
+}
+
+/* Ajustes para navegadores que no soportan ciertas características */
+@supports not (object-fit: cover) {
+    .skin-slide {
+        width: auto;
+        height: 100%;
+        margin: 0 auto;
+    }
+}
+
