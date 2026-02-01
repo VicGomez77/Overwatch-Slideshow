@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overwatch 2 - Demo Interactiva</title>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/demo.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="demo-page">
+    <!-- Fondo fibra de carbono -->
+    <div class="carbon-fiber-background"></div>
+    
+    <!-- Navegación principal -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html" style="text-decoration: none; color: inherit;">
+                    <span class="pixel-text">OVERWATCH 2</span>
+                    <span class="rebranding-text">DEMO INTERACTIVA</span>
+                </a>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">INICIO</a>
+                <a href="demo.html" class="nav-link active">DEMO</a>
+                <div class="theme-toggle-container">
+                    <button class="theme-toggle" id="themeToggle">
+                        <span class="theme-icon">🌙</span>
+                        <span class="theme-text">TEMA OSCURO</span>
+                    </button>
+                </div>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <span class="pixel-bar"></span>
+                <span class="pixel-bar"></span>
+                <span class="pixel-bar"></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Menú de navegación de demo -->
+    <div class="demo-navigation-container">
+        <div class="demo-nav-header">
+            <h2 class="demo-title">DEMO INTERACTIVA</h2>
+            <p class="demo-subtitle">Explora las 4 pantallas de configuración</p>
+        </div>
+        
+        <nav class="demo-nav">
+            <button class="demo-nav-btn active" data-screen="config">
+                <span class="nav-icon">⚙️</span>
+                <span class="nav-text">CONFIGURACIÓN</span>
+            </button>
+            
+            <button class="demo-nav-btn" data-screen="characters">
+                <span class="nav-icon">👤</span>
+                <span class="nav-text">PERSONAJES</span>
+            </button>
+            
+            <button class="demo-nav-btn" data-screen="hud">
+                <span class="nav-icon">🎯</span>
+                <span class="nav-text">HUD</span>
+            </button>
+            
+            <button class="demo-nav-btn" data-screen="maps">
+                <span class="nav-icon">🗺️</span>
+                <span class="nav-text">MAPAS</span>
+            </button>
+        </nav>
+    </div>
+
+    <!-- Contenedor principal de pantallas -->
+    <main class="demo-main-container">
+        <!-- Pantalla de Configuración -->
+        <section id="config-screen" class="demo-screen active">
+            <div class="screen-header">
+                <h3 class="screen-title">CONFIGURACIÓN DEL JUEGO</h3>
+                <p class="screen-description">Ajusta los parámetros gráficos y de sonido</p>
+            </div>
+            
+            <!-- El contenido de configuración se cargará aquí -->
+            <div class="screen-content" id="config-content">
+                <!-- Se carga dinámicamente desde config.html -->
+            </div>
+        </section>
+
+        <!-- Pantalla de Personajes -->
+        <section id="characters-screen" class="demo-screen">
+            <div class="screen-header">
+                <h3 class="screen-title">SELECCIÓN DE PERSONAJES</h3>
+                <p class="screen-description">Elige tu héroe y personaliza su apariencia</p>
+            </div>
+            
+            <div class="screen-content" id="characters-content">
+                <!-- Se carga dinámicamente desde characters.html -->
+            </div>
+        </section>
+
+        <!-- Pantalla de HUD -->
+        <section id="hud-screen" class="demo-screen">
+            <div class="screen-header">
+                <h3 class="screen-title">CONFIGURACIÓN DE HUD</h3>
+                <p class="screen-description">Personaliza la interfaz de usuario</p>
+            </div>
+            
+            <div class="screen-content" id="hud-content">
+                <!-- Se carga dinámicamente desde hud.html -->
+            </div>
+        </section>
+
+        <!-- Pantalla de Mapas -->
+        <section id="maps-screen" class="demo-screen">
+            <div class="screen-header">
+                <h3 class="screen-title">SELECCIÓN DE MAPAS</h3>
+                <p class="screen-description">Explora los escenarios disponibles</p>
+            </div>
+            
+            <div class="screen-content" id="maps-content">
+                <div class="maps-container">
+                    <div class="map-grid">
+                        <!-- Los mapas se generarán dinámicamente -->
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Controles de demo -->
+    <div class="demo-controls">
+        <div class="controls-info">
+            <span class="controls-label">CONTROLES:</span>
+            <span class="controls-hint">Usa las teclas 1-4 o los botones arriba para navegar</span>
+        </div>
+        
+        <div class="sound-toggle">
+            <button class="sound-btn" id="soundToggle">
+                <span class="sound-icon">🔊</span>
+                <span class="sound-text">SONIDO: ON</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="pixel-text">OVERWATCH 2</span>
+                <span class="footer-subtitle">DEMO INTERACTIVA</span>
+            </div>
+            
+            <div class="footer-links">
+                <a href="index.html" class="footer-link">Volver al Inicio</a>
+                <a href="#config-screen" class="footer-link">Configuración</a>
+                <a href="#characters-screen" class="footer-link">Personajes</a>
+                <a href="#hud-screen" class="footer-link">HUD</a>
+            </div>
+            
+            <p class="copyright">
+                © 2025 Universidad de Diseño y Tecnología. Proyecto académico.<br>
+                Demo interactiva - Diseño Web Avanzado
+            </p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/demo-navigation.js"></script>
+    <script src="js/demo-content-loader.js"></script>
+</body>
+</html>

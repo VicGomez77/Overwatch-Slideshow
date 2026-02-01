@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Overwatch 2 - Pixel Art Rebranding</title>
+    
+    <!-- Fuentes -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/landing.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="landing-page">
+    <!-- Fondo con efecto fibra de carbono -->
+    <div class="carbon-fiber-background"></div>
+    
+    <!-- Navegación -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="pixel-text">OVERWATCH 2</span>
+                <span class="rebranding-text">PIXEL REBRAND</span>
+            </div>
+            
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">INICIO</a>
+                <a href="demo.html" class="nav-link">DEMO INTERACTIVA</a>
+                <a href="#heroes" class="nav-link">HÉROES</a>
+                <a href="#form" class="nav-link nav-cta">BETA SIGN UP</a>
+            </div>
+            
+            <button class="mobile-menu-btn">
+                <span class="pixel-bar"></span>
+                <span class="pixel-bar"></span>
+                <span class="pixel-bar"></span>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="main-title">
+                <span class="title-line-1">OVERWATCH 2</span>
+                <span class="title-line-2">PIXEL ART REBRANDING</span>
+            </h1>
+            
+            <p class="game-description">
+                Hemos imaginado cómo sería la idea de hacer Overwatch 2 con arte pixelart, 
+                manteniendo la esencia competitiva pero con un toque retro único. 
+                Explora configuraciones, personaliza HUDs y descubre a los héroes en 8-bit.
+            </p>
+            
+            <div class="key-features">
+                <div class="feature">
+                    <div class="feature-icon pixel-icon">🎮</div>
+                    <h3>ESTILO PIXEL ART</h3>
+                    <p>Gráficos retro con personajes detallados</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon pixel-icon">⚙️</div>
+                    <h3>CONFIGURACIÓN COMPLETA</h3>
+                    <p>Personaliza cada aspecto del juego</p>
+                </div>
+                <div class="feature">
+                    <div class="feature-icon pixel-icon">🕹️</div>
+                    <h3>4 HÉROES ICÓNICOS</h3>
+                    <p>Tracer, Genji, Mercy y Winston</p>
+                </div>
+            </div>
+            
+            <div class="cta-buttons">
+                <a href="demo.html" class="btn-primary">PROBAR DEMO</a>
+                <a href="#form" class="btn-secondary">REGISTRARSE PARA BETA</a>
+            </div>
+        </div>
+        
+        <div class="hero-image">
+            <div class="pixel-hero-display">
+                <div class="pixel-hero" id="landingHero">
+                    <div class="pixel-grid"></div>
+                    <div class="hero-name">TRACER</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Formulario de Inscripción Beta -->
+    <section id="form" class="beta-form-section">
+        <div class="form-container">
+            <h2 class="section-title">REGÍSTRATE PARA EL ACCESO BETA</h2>
+            <p class="form-description">
+                Sé uno de los primeros en probar Overwatch 2 Pixel Edition. 
+                Recibirás una clave de acceso antes del lanzamiento oficial.
+            </p>
+            
+            <form id="beta-signup-form" class="beta-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="pixel-label">NOMBRE</label>
+                        <input type="text" id="name" name="name" required class="pixel-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="pixel-label">EMAIL</label>
+                        <input type="email" id="email" name="email" required class="pixel-input">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="platform" class="pixel-label">PLATAFORMA PREFERIDA</label>
+                    <select id="platform" name="platform" class="pixel-select">
+                        <option value="pc">PC</option>
+                        <option value="playstation">PlayStation</option>
+                        <option value="xbox">Xbox</option>
+                        <option value="switch">Nintendo Switch</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="pixel-label checkbox-label">
+                        <input type="checkbox" name="newsletter" checked>
+                        <span class="pixel-checkbox"></span>
+                        Recibir noticias y actualizaciones sobre el juego
+                    </label>
+                </div>
+                
+                <button type="submit" class="btn-submit">ENVIAR SOLICITUD</button>
+            </form>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="pixel-text">OVERWATCH 2</span>
+                <span class="footer-subtitle">PIXEL ART EDITION</span>
+            </div>
+            
+            <div class="footer-links">
+                <a href="#" class="footer-link">Términos de Servicio</a>
+                <a href="#" class="footer-link">Política de Privacidad</a>
+                <a href="#" class="footer-link">Soporte</a>
+            </div>
+            
+            <p class="copyright">
+                © 2025 Universidad de Diseño y Tecnología.<br>
+                Overwatch es propiedad de Blizzard Entertainment.
+            </p>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/form-validation.js"></script>
+</body>
+</html>

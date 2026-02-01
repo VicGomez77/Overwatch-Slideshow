@@ -1,0 +1,387 @@
+/* ============================================
+   ESTILOS ESPECÍFICOS PARA DEMO INTERACTIVA
+   ============================================ */
+
+.demo-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Contenedor de navegación demo */
+.demo-navigation-container {
+    background-color: rgba(15, 15, 15, 0.9);
+    border-bottom: 3px solid var(--ow-orange);
+    padding: 1.5rem 2rem;
+    margin-top: 1rem;
+}
+
+.demo-nav-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.demo-title {
+    color: var(--ow-yellow);
+    font-size: 2.2rem;
+    text-shadow: 2px 2px 0 var(--ow-black);
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.demo-subtitle {
+    color: var(--ow-light-gray);
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* Navegación demo */
+.demo-nav {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.demo-nav-btn {
+    padding: 1rem 2rem;
+    background-color: var(--ow-dark-gray);
+    color: var(--ow-light-gray);
+    border: 2px solid var(--ow-orange);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    border-radius: 2px;
+    min-width: 200px;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.demo-nav-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 156, 0, 0.2), transparent);
+    transition: left 0.7s;
+}
+
+.demo-nav-btn:hover::before {
+    left: 100%;
+}
+
+.demo-nav-btn:hover {
+    background-color: rgba(255, 156, 0, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 156, 0, 0.2);
+}
+
+.demo-nav-btn.active {
+    background-color: var(--ow-orange);
+    color: var(--ow-black);
+    border-color: var(--ow-yellow);
+    font-weight: 600;
+    box-shadow: 0 0 20px rgba(255, 156, 0, 0.4);
+}
+
+.demo-nav-btn.active::before {
+    display: none;
+}
+
+.demo-nav-btn.active:hover {
+    background-color: var(--ow-yellow);
+}
+
+.nav-icon {
+    font-size: 1.3rem;
+}
+
+.nav-text {
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Contenedor principal demo */
+.demo-main-container {
+    flex: 1;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+    width: 100%;
+}
+
+/* Pantallas demo */
+.demo-screen {
+    display: none;
+    background-color: rgba(26, 26, 26, 0.9);
+    border: 3px solid var(--ow-orange);
+    border-radius: 4px;
+    padding: 2rem;
+    min-height: 600px;
+    animation: slide-in-up 0.5s ease forwards;
+}
+
+.demo-screen.active {
+    display: block;
+}
+
+.screen-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid rgba(255, 156, 0, 0.3);
+}
+
+.screen-title {
+    color: var(--ow-yellow);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 2px 2px 0 var(--ow-black);
+    letter-spacing: 1px;
+}
+
+.screen-description {
+    color: var(--ow-light-gray);
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.screen-content {
+    padding: 1rem 0;
+}
+
+/* Contenido específico para mapas (ya que no tiene archivo separado) */
+.maps-container {
+    padding: 1rem;
+}
+
+.map-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.map-card {
+    background-color: var(--ow-black);
+    border: 2px solid var(--ow-dark-gray);
+    border-radius: 4px;
+    overflow: hidden;
+    transition: all var(--transition-medium);
+    cursor: pointer;
+    position: relative;
+}
+
+.map-card:hover {
+    border-color: var(--ow-orange);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.map-image {
+    width: 100%;
+    height: 180px;
+    background: linear-gradient(45deg, var(--ow-dark-gray), var(--ow-black));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--ow-orange);
+    font-size: 3rem;
+}
+
+.map-info {
+    padding: 1.5rem;
+}
+
+.map-name {
+    color: var(--ow-yellow);
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.map-type {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background-color: var(--ow-orange);
+    color: var(--ow-black);
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 2px;
+    margin-bottom: 1rem;
+}
+
+.map-description {
+    color: var(--ow-light-gray);
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+/* Controles demo */
+.demo-controls {
+    background-color: rgba(15, 15, 15, 0.9);
+    border-top: 3px solid var(--ow-orange);
+    padding: 1rem 2rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.controls-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.controls-label {
+    color: var(--ow-orange);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.controls-hint {
+    color: var(--ow-light-gray);
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.sound-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.sound-btn {
+    padding: 0.5rem 1.5rem;
+    background-color: var(--ow-dark-gray);
+    color: var(--ow-light-gray);
+    border: 2px solid var(--ow-light-gray);
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 2px;
+}
+
+.sound-btn:hover {
+    background-color: rgba(255, 156, 0, 0.1);
+    border-color: var(--ow-orange);
+}
+
+.sound-btn.muted .sound-icon {
+    color: var(--ow-red);
+}
+
+.sound-btn.muted .sound-text::after {
+    content: ": OFF";
+}
+
+/* Tema claro/oscuro */
+.theme-toggle-container {
+    margin-left: 1rem;
+}
+
+.theme-toggle {
+    padding: 0.5rem 1rem;
+    background-color: var(--ow-dark-gray);
+    color: var(--ow-light-gray);
+    border: 2px solid var(--ow-light-gray);
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all var(--transition-medium);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 2px;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 156, 0, 0.1);
+    border-color: var(--ow-orange);
+}
+
+.theme-toggle.active {
+    background-color: var(--ow-orange);
+    color: var(--ow-black);
+    border-color: var(--ow-yellow);
+}
+
+/* Indicador de carga de contenido */
+.content-loader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+    gap: 1.5rem;
+}
+
+.loader-spinner {
+    width: 50px;
+    height: 50px;
+    border: 3px solid var(--ow-dark-gray);
+    border-top-color: var(--ow-orange);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loader-text {
+    color: var(--ow-light-gray);
+    font-size: 1.1rem;
+}
+
+/* Transiciones entre pantallas */
+.screen-transition-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.screen-transition-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+.screen-transition-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.screen-transition-exit-active {
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.3s, transform 0.3s;
+}
+
+/* Efecto de selección en mapas */
+.map-card.selected {
+    border-color: var(--ow-yellow);
+    box-shadow: 0 0 20px rgba(255, 230, 0, 0.4);
+    position: relative;
+}
+
+.map-card.selected::before {
+    content: '✓ SELECCIONADO';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: var(--ow-yellow);
+    color: var(--ow-black);
+    padding: 0.3rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    border-radius: 2px;
+    z-index: 2;
+}

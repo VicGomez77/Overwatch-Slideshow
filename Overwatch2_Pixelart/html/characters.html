@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selección de Personajes - Overwatch 2 Pixel</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/characters.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="characters-page">
+    <div class="characters-container">
+        <!-- Encabezado -->
+        <div class="characters-header">
+            <h1 class="characters-title">SELECCIÓN DE PERSONAJES</h1>
+            <p class="characters-subtitle">Elige entre 4 héroes icónicos de Overwatch 2 en estilo pixel art</p>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="characters-main">
+            <!-- Lista de personajes -->
+            <div class="characters-list">
+                <div class="hero-item active" data-hero="tracer">
+                    <div class="hero-avatar">
+                        <div class="avatar-frame">
+                            <div class="avatar-image tracer-avatar"></div>
+                        </div>
+                    </div>
+                    <div class="hero-info-short">
+                        <h3 class="hero-name">TRACER</h3>
+                        <div class="hero-role-badge damage">DAÑO</div>
+                        <div class="hero-difficulty">
+                            <span class="difficulty-label">DIFICULTAD:</span>
+                            <div class="difficulty-stars">
+                                <span class="star active"></span>
+                                <span class="star active"></span>
+                                <span class="star"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-item" data-hero="genji">
+                    <div class="hero-avatar">
+                        <div class="avatar-frame">
+                            <div class="avatar-image genji-avatar"></div>
+                        </div>
+                    </div>
+                    <div class="hero-info-short">
+                        <h3 class="hero-name">GENJI</h3>
+                        <div class="hero-role-badge damage">DAÑO</div>
+                        <div class="hero-difficulty">
+                            <span class="difficulty-label">DIFICULTAD:</span>
+                            <div class="difficulty-stars">
+                                <span class="star active"></span>
+                                <span class="star active"></span>
+                                <span class="star active"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-item" data-hero="mercy">
+                    <div class="hero-avatar">
+                        <div class="avatar-frame">
+                            <div class="avatar-image mercy-avatar"></div>
+                        </div>
+                    </div>
+                    <div class="hero-info-short">
+                        <h3 class="hero-name">MERCY</h3>
+                        <div class="hero-role-badge support">APOYO</div>
+                        <div class="hero-difficulty">
+                            <span class="difficulty-label">DIFICULTAD:</span>
+                            <div class="difficulty-stars">
+                                <span class="star active"></span>
+                                <span class="star"></span>
+                                <span class="star"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-item" data-hero="winston">
+                    <div class="hero-avatar">
+                        <div class="avatar-frame">
+                            <div class="avatar-image winston-avatar"></div>
+                        </div>
+                    </div>
+                    <div class="hero-info-short">
+                        <h3 class="hero-name">WINSTON</h3>
+                        <div class="hero-role-badge tank">TANQUE</div>
+                        <div class="hero-difficulty">
+                            <span class="difficulty-label">DIFICULTAD:</span>
+                            <div class="difficulty-stars">
+                                <span class="star active"></span>
+                                <span class="star active"></span>
+                                <span class="star"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de visualización del personaje -->
+            <div class="character-display">
+                <!-- Slideshow de skins -->
+                <div class="skin-slideshow-container">
+                    <div class="slideshow-header">
+                        <h3 class="slideshow-title">SKINS DISPONIBLES</h3>
+                        <div class="slideshow-controls">
+                            <button class="slideshow-btn prev-btn">
+                                <span class="btn-icon">◄</span>
+                            </button>
+                            <span class="slide-counter">
+                                <span class="current-slide">1</span>/<span class="total-slides">4</span>
+                            </span>
+                            <button class="slideshow-btn next-btn">
+                                <span class="btn-icon">►</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="skin-slideshow">
+                        <div class="slide active" data-skin="1">
+                            <div class="slide-image tracer-default"></div>
+                            <div class="slide-info">
+                                <h4 class="skin-name">CLÁSICA</h4>
+                                <p class="skin-rarity common">COMÚN</p>
+                            </div>
+                        </div>
+                        
+                        <div class="slide" data-skin="2">
+                            <div class="slide-image tracer-legendary"></div>
+                            <div class="slide-info">
+                                <h4 class="skin-name">PUNK</h4>
+                                <p class="skin-rarity legendary">LEGENDARIA</p>
+                            </div>
+                        </div>
+                        
+                        <div class="slide" data-skin="3">
+                            <div class="slide-image tracer-epic"></div>
+                            <div class="slide-info">
+                                <h4 class="skin-name">NEÓN</h4>
+                                <p class="skin-rarity epic">ÉPICA</p>
+                            </div>
+                        </div>
+                        
+                        <div class="slide" data-skin="4">
+                            <div class="slide-image tracer-rare"></div>
+                            <div class="slide-info">
+                                <h4 class="skin-name">RASTAFARI</h4>
+                                <p class="skin-rarity rare">RARA</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="slideshow-dots">
+                        <button class="dot active" data-slide="0"></button>
+                        <button class="dot" data-slide="1"></button>
+                        <button class="dot" data-slide="2"></button>
+                        <button class="dot" data-slide="3"></button>
+                    </div>
+                </div>
+
+                <!-- Información detallada del personaje -->
+                <div class="character-details">
+                    <div class="details-header">
+                        <h2 class="character-name" id="current-hero-name">TRACER</h2>
+                        <div class="character-meta">
+                            <span class="real-name" id="current-real-name">Lena Oxton</span>
+                            <span class="age" id="current-age">26 años</span>
+                            <span class="origin" id="current-origin">Londres, Inglaterra</span>
+                        </div>
+                    </div>
+
+                    <div class="character-stats">
+                        <div class="stat-item">
+                            <div class="stat-label">DAÑO</div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 80%"></div>
+                            </div>
+                            <div class="stat-value">8/10</div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-label">MOVILIDAD</div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 95%"></div>
+                            </div>
+                            <div class="stat-value">9.5/10</div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-label">SUPERVIVENCIA</div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 40%"></div>
+                            </div>
+                            <div class="stat-value">4/10</div>
+                        </div>
+                        
+                        <div class="stat-item">
+                            <div class="stat-label">UTILIDAD</div>
+                            <div class="stat-bar">
+                                <div class="stat-fill" style="width: 60%"></div>
+                            </div>
+                            <div class="stat-value">6/10</div>
+                        </div>
+                    </div>
+
+                    <div class="character-description">
+                        <h3 class="description-title">HISTORIA</h3>
+                        <p class="description-text" id="current-bio">
+                            Lena Oxton era la piloto de pruebas más joven del programa experimental de teleportación de Overwatch. 
+                            Durante una misión fallida, su avión se desintegró y ella quedó desfasada en el tiempo, apareciendo y 
+                            desapareciendo de la realidad. Winston y Mercy lograron estabilizarla con un acelerador cronológico 
+                            implantado en su pecho. Desde entonces, Tracer se convirtió en el rostro alegre y valiente de Overwatch, 
+                            luchando por la justicia en todo el mundo.
+                        </p>
+                    </div>
+
+                    <div class="character-abilities">
+                        <h3 class="abilities-title">HABILIDADES</h3>
+                        <div class="abilities-grid">
+                            <!-- Las habilidades se cargan dinámicamente -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles -->
+        <div class="characters-controls">
+            <button class="control-btn select-btn">
+                <span class="btn-icon">✓</span>
+                <span class="btn-text">SELECCIONAR PERSONAJE</span>
+            </button>
+            
+            <button class="control-btn random-btn">
+                <span class="btn-icon">🎲</span>
+                <span class="btn-text">ALEATORIO</span>
+            </button>
+            
+            <div class="selection-status">
+                <span class="status-label">PERSONAJE SELECCIONADO:</span>
+                <span class="status-value">NINGUNO</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/characters-slideshow.js"></script>
+    <script src="js/characters-data.js"></script>
+</body>
+</html>

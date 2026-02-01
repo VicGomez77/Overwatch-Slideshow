@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuración HUD - Overwatch 2 Pixel</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/hud.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body class="hud-page">
+    <div class="hud-container">
+        <!-- Encabezado -->
+        <div class="hud-header">
+            <h1 class="hud-title">CONFIGURACIÓN DE HUD</h1>
+            <p class="hud-subtitle">Personaliza la interfaz de usuario y los elementos en pantalla</p>
+        </div>
+
+        <!-- Contenido principal -->
+        <div class="hud-main">
+            <!-- Panel de vista previa -->
+            <div class="hud-preview-container">
+                <div class="preview-header">
+                    <h3 class="preview-title">VISTA PREVIA DEL HUD</h3>
+                    <div class="preview-controls">
+                        <button class="preview-btn" id="reset-hud-position">
+                            <span class="btn-icon">🔄</span>
+                            <span class="btn-text">Reiniciar Posiciones</span>
+                        </button>
+                        <button class="preview-btn" id="toggle-hud-elements">
+                            <span class="btn-icon">👁️</span>
+                            <span class="btn-text">Mostrar/Ocultar Todos</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="hud-preview" id="hud-preview-area">
+                    <!-- Aquí se renderizan los elementos HUD -->
+                    
+                    <!-- Barra de salud -->
+                    <div class="hud-element health-bar" data-element="health" style="top: 20px; left: 20px;">
+                        <div class="element-header">
+                            <span class="element-icon">❤️</span>
+                            <span class="element-name">SALUD</span>
+                            <button class="element-toggle">✓</button>
+                        </div>
+                        <div class="element-content">
+                            <div class="health-container">
+                                <div class="health-fill" style="width: 85%"></div>
+                                <div class="health-text">850/1000</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Barra de habilidad definitiva -->
+                    <div class="hud-element ultimate-bar" data-element="ultimate" style="top: 20px; right: 20px;">
+                        <div class="element-header">
+                            <span class="element-icon">⚡</span>
+                            <span class="element-name">DEFINITIVA</span>
+                            <button class="element-toggle">✓</button>
+                        </div>
+                        <div class="element-content">
+                            <div class="ultimate-container">
+                                <div class="ultimate-fill" style="width: 60%"></div>
+                                <div class="ultimate-text">60%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Habilidades -->
+                    <div class="hud-element abilities" data-element="abilities" style="bottom: 20px; left: 20px;">
+                        <div class="element-header">
+                            <span class="element-icon">🎯</span>
+                            <span class="element-name">HABILIDADES</span>
+                            <button class="element-toggle">✓</button>
+                        </div>
+                        <div class="element-content">
+                            <div class="abilities-container">
+                                <div class="ability-slot" data-ability="1">
+                                    <div class="ability-icon">Q</div>
+                                    <div class="ability-cooldown">3s</div>
+                                </div>
+                                <div class="ability-slot" data-ability="2">
+                                    <div class="ability-icon">E</div>
+                                    <div class="ability-cooldown">8s</div>
+                                </div>
+                                <div class="ability-slot" data-ability="3">
+                                    <div class="ability-icon">Shift</div>
+                                    <div class="ability-cooldown active">Listo</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Munición -->
+                    <div class="hud-element ammo" data-element="ammo" style="bottom: 20px; right: 20px;">
+                        <div class="element-header">
+                            <span class="element-icon">🔫</span>
+                            <span class="element-name">MUNICIÓN</span>
+                            <button class="element-toggle">✓</button>
+                        </div>
+                        <div class="element-content">
+                            <div class="ammo-container">
+                                <div class="ammo-current">24</div>
+                                <div class="ammo-separator">/</div>
+                                <div class="ammo-total">120</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Minimapa -->
+                    <div class="hud-element minimap" data-element="minimap" style="top: 50%; right: 20px; transform: translateY(-50%);">
+                        <div class="element-header">
+                            <span class="element-icon">🗺️</span>
+                            <span class="element-name">MINIMAPA</span>
+                            <button class="element-toggle">✓</button>
+                        </div>
+                        <div class="element-content">
+                            <div class="minimap-display">
+                                <div class="map-grid"></div>
+                                <div class="player-marker"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Información de equipo -->
+                    <div class="hud-element team-info" data-element="team" style="left: 20px; top: 50%; transform: translateY(-50%);">
+                        <div class="element-header">
+                            <span class="element-icon">👥</span>
+                            <span class="element-name">EQUIPO</span>
+                            <button class="element-toggle">✓</button>
+                        </div>
+                        <div class="element-content">
+                            <div class="team-container">
+                                <div class="team-member active">
+                                    <div class="member-health">100%</div>
+                                    <div class="member-name">Tracer</div>
+                                </div>
+                                <div class="team-member">
+                                    <div class="member-health">75%</div>
+                                    <div class="member-name">Mercy</div>
+                                </div>
+                                <div class="team-member">
+                                    <div class="member-health">50%</div>
+                                    <div class="member-name">Winston</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-actions">
+                    <button class="action-btn test-btn" id="test-hud">
+                        <span class="btn-icon">▶️</span>
+                        <span class="btn-text">PROBAR HUD</span>
+                    </button>
+                    <button class="action-btn save-btn" id="save-hud">
+                        <span class="btn-icon">💾</span>
+                        <span class="btn-text">GUARDAR CONFIGURACIÓN</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Panel de controles -->
+            <div class="hud-controls-panel">
+                <div class="controls-header">
+                    <h3 class="controls-title">CONTROLES DE PERSONALIZACIÓN</h3>
+                    <p class="controls-subtitle">Arrastra los elementos y ajusta su apariencia</p>
+                </div>
+
+                <!-- Navegación de elementos -->
+                <div class="elements-navigation">
+                    <div class="elements-tabs">
+                        <button class="element-tab active" data-tab="position">POSICIÓN</button>
+                        <button class="element-tab" data-tab="appearance">APARIENCIA</button>
+                        <button class="element-tab" data-tab="behavior">COMPORTAMIENTO</button>
+                    </div>
+
+                    <!-- Contenido de las pestañas -->
+                    <div class="elements-content">
+                        <!-- Pestaña Posición -->
+                        <div class="tab-content active" id="position-tab">
+                            <div class="position-controls">
+                                <div class="control-group">
+                                    <h4 class="control-title">ELEMENTO SELECCIONADO</h4>
+                                    <select class="element-selector" id="element-selector">
+                                        <option value="health">Barra de Salud</option>
+                                        <option value="ultimate">Barra de Definitiva</option>
+                                        <option value="abilities">Habilidades</option>
+                                        <option value="ammo">Munición</option>
+                                        <option value="minimap">Minimapa</option>
+                                        <option value="team">Información de Equipo</option>
+                                    </select>
+                                </div>
+
+                                <div class="control-group">
+                                    <h4 class="control-title">POSICIÓN</h4>
+                                    <div class="position-inputs">
+                                        <div class="input-group">
+                                            <label class="input-label">X (px)</label>
+                                            <input type="number" class="pixel-input" id="pos-x" min="0" max="1000" value="20">
+                                        </div>
+                                        <div class="input-group">
+                                            <label class="input-label">Y (px)</label>
+                                            <input type="number" class="pixel-input" id="pos-y" min="0" max="1000" value="20">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <h4 class="control-title">TAMAÑO</h4>
+                                    <div class="size-controls">
+                                        <div class="slider-control">
+                                            <label class="slider-label">Ancho: <span id="width-value">200px</span></label>
+                                            <input type="range" min="100" max="500" value="200" class="pixel-slider" id="width-slider">
+                                        </div>
+                                        <div class="slider-control">
+                                            <label class="slider-label">Alto: <span id="height-value">80px</span></label>
+                                            <input type="range" min="50" max="300" value="80" class="pixel-slider" id="height-slider">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <h4 class="control-title">PRESETS DE POSICIÓN</h4>
+                                    <div class="position-presets">
+                                        <button class="preset-btn" data-preset="default">Por Defecto</button>
+                                        <button class="preset-btn" data-preset="minimal">Mínimo</button>
+                                        <button class="preset-btn" data-preset="pro">Competitivo</button>
+                                        <button class="preset-btn" data-preset="custom">Personalizado</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pestaña Apariencia -->
+                        <div class="tab-content" id="appearance-tab">
+                            <div class="appearance-controls">
+                                <div class="control-group">
+                                    <h4 class="control-title">COLORES</h4>
+                                    <div class="color-pickers">
+                                        <div class="color-picker">
+                                            <label class="color-label">Color Principal</label>
+                                            <input type="color" class="color-input" id="primary-color" value="#FF9C00">
+                                            <span class="color-value" id="primary-color-value">#FF9C00</span>
+                                        </div>
+                                        <div class="color-picker">
+                                            <label class="color-label">Color Secundario</label>
+                                            <input type="color" class="color-input" id="secondary-color" value="#FFE600">
+                                            <span class="color-value" id="secondary-color-value">#FFE600</span>
+                                        </div>
+                                        <div class="color-picker">
+                                            <label class="color-label">Fondo</label>
+                                            <input type="color" class="color-input" id="background-color" value="#1A1A1A">
+                                            <span class="color-value" id="background-color-value">#1A1A1A</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <h4 class="control-title">OPACIDAD</h4>
+                                    <div class="opacity-controls">
+                                        <div class="slider-control">
+                                            <label class="slider-label">Opacidad: <span id="opacity-value">90%</span></label>
+                                            <input type="range" min="10" max="100" value="90" class="pixel-slider" id="opacity-slider">
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="hover-opacity" checked>
+                                                <span class="pixel-checkbox"></span>
+                                                Cambiar opacidad al pasar el cursor
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <h4 class="control-title">BORDES Y SOMBRAS</h4>
+                                    <div class="border-controls">
+                                        <div class="slider-control">
+                                            <label class="slider-label">Grosor del borde: <span id="border-value">2px</span></label>
+                                            <input type="range" min="0" max="10" value="2" class="pixel-slider" id="border-slider">
+                                        </div>
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="shadow-toggle" checked>
+                                                <span class="pixel-checkbox"></span>
+                                                Sombra
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Pestaña Comportamiento -->
+                        <div class="tab-content" id="behavior-tab">
+                            <div class="behavior-controls">
+                                <div class="control-group">
+                                    <h4 class="control-title">VISIBILIDAD</h4>
+                                    <div class="visibility-controls">
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="always-visible" checked>
+                                                <span class="pixel-checkbox"></span>
+                                                Siempre visible
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="hide-in-combat">
+                                                <span class="pixel-checkbox"></span>
+                                                Ocultar en combate
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="show-on-hover">
+                                                <span class="pixel-checkbox"></span>
+                                                Mostrar al pasar el cursor
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <h4 class="control-title">ANIMACIONES</h4>
+                                    <div class="animation-controls">
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="damage-animation" checked>
+                                                <span class="pixel-checkbox"></span>
+                                                Animación al recibir daño
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="low-health-animation" checked>
+                                                <span class="pixel-checkbox"></span>
+                                                Animación de salud baja
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="ability-animation" checked>
+                                                <span class="pixel-checkbox"></span>
+                                                Animación de habilidades
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="control-group">
+                                    <h4 class="control-title">SONIDOS</h4>
+                                    <div class="sound-controls">
+                                        <div class="checkbox-group">
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="low-health-sound" checked>
+                                                <span class="pixel-checkbox"></span>
+                                                Sonido de salud baja
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="ability-ready-sound" checked>
+                                                <span class="pixel-checkbox"></span>
+                                                Sonido de habilidad lista
+                                            </label>
+                                            <label class="checkbox-label">
+                                                <input type="checkbox" id="ultimate-ready-sound" checked>
+                                                <span class="pixel-checkbox"></span>
+                                                Sonido de definitiva lista
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Configuración rápida -->
+                <div class="quick-settings">
+                    <h4 class="quick-title">CONFIGURACIÓN RÁPIDA</h4>
+                    <div class="quick-buttons">
+                        <button class="quick-btn" id="toggle-all-hud">
+                            <span class="btn-icon">👁️</span>
+                            <span>Mostrar/Ocultar Todo</span>
+                        </button>
+                        <button class="quick-btn" id="reset-hud-appearance">
+                            <span class="btn-icon">🔄</span>
+                            <span>Reiniciar Apariencia</span>
+                        </button>
+                        <button class="quick-btn" id="export-hud">
+                            <span class="btn-icon">📤</span>
+                            <span>Exportar Configuración</span>
+                        </button>
+                        <button class="quick-btn" id="import-hud">
+                            <span class="btn-icon">📥</span>
+                            <span>Importar Configuración</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Información de estado -->
+        <div class="hud-status">
+            <div class="status-info">
+                <span class="status-label">ESTADO:</span>
+                <span class="status-value" id="hud-status-value">Configuración activa</span>
+            </div>
+            <div class="status-actions">
+                <button class="status-btn apply-btn" id="apply-hud">
+                    <span class="btn-icon">✓</span>
+                    <span class="btn-text">APLICAR CAMBIOS</span>
+                </button>
+                <button class="status-btn cancel-btn" id="cancel-hud">
+                    <span class="btn-icon">✕</span>
+                    <span class="btn-text">CANCELAR</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/hud-customization.js"></script>
+</body>
+</html>
