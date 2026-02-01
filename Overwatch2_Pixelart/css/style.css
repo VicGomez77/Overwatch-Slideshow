@@ -1,6 +1,4 @@
-/* ============================================
-   VARIABLES CSS - PALETA DE COLORES OVERWATCH
-   ============================================ */
+/* VARIABLES CSS - PALETA DE COLORES OVERWATCH */
 :root {
     /* Colores principales */
     --ow-orange: #FF9C00;
@@ -25,9 +23,7 @@
     --transition-slow: 0.5s ease;
 }
 
-/* ============================================
-   RESET Y ESTILOS BASE
-   ============================================ */
+/* RESET Y ESTILOS BASE */
 * {
     margin: 0;
     padding: 0;
@@ -47,9 +43,7 @@ body {
     overflow-x: hidden;
 }
 
-/* ============================================
-   FONDO FIBRA DE CARBONO (Compartido)
-   ============================================ */
+/* FONDO FIBRA DE CARBONO */
 .carbon-fiber-background {
     position: fixed;
     top: 0;
@@ -68,9 +62,7 @@ body {
     pointer-events: none;
 }
 
-/* ============================================
-   TIPOGRAFÍA PIXEL ART
-   ============================================ */
+/* TIPOGRAFÍA OVERWATCH (Oswald)*/
 .pixel-text {
     font-family: 'Oswald', sans-serif;
     letter-spacing: 1px;
@@ -79,9 +71,7 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* ============================================
-   NAVEGACIÓN PRINCIPAL (Compartida)
-   ============================================ */
+/* NAVEGACIÓN PRINCIPAL*/
 .main-nav {
     background-color: rgba(15, 15, 15, 0.95);
     border-bottom: 3px solid var(--ow-orange);
@@ -212,9 +202,7 @@ body {
     border-radius: 1px;
 }
 
-/* ============================================
-   BOTONES (Compartidos)
-   ============================================ */
+/*BOTONES*/
 .btn-primary,
 .btn-secondary,
 .btn-submit {
@@ -290,9 +278,7 @@ body {
     box-shadow: 0 4px 12px rgba(255, 156, 0, 0.4);
 }
 
-/* ============================================
-   FORMULARIOS (Compartidos)
-   ============================================ */
+/*FORMULARIOS*/
 .pixel-input,
 .pixel-select,
 .pixel-textarea {
@@ -378,9 +364,7 @@ input[type="checkbox"]:checked + .pixel-checkbox::after {
     transform: translate(-50%, -50%);
 }
 
-/* ============================================
-   FOOTER (Compartido)
-   ============================================ */
+/* FOOTER */
 .main-footer {
     background-color: var(--ow-dark-gray);
     padding: 2rem;
@@ -452,9 +436,7 @@ input[type="checkbox"]:checked + .pixel-checkbox::after {
     line-height: 1.4;
 }
 
-/* ============================================
-   NOTIFICACIONES (Compartidas)
-   ============================================ */
+/* NOTIFICACIONES */
 .notification {
     position: fixed;
     top: 20px;
@@ -485,9 +467,7 @@ input[type="checkbox"]:checked + .pixel-checkbox::after {
     color: white;
 }
 
-/* ============================================
-   ANIMACIONES CSS (Compartidas)
-   ============================================ */
+/* ANIMACIONES CSS (Compartidas)*/
 @keyframes pixel-glow {
     0% {
         box-shadow: 0 0 5px var(--ow-orange);
@@ -562,9 +542,7 @@ input[type="checkbox"]:checked + .pixel-checkbox::after {
     animation: pulse 1.5s infinite;
 }
 
-/* ============================================
-   UTILIDADES (Compartidas)
-   ============================================ */
+/* UTILIDADES*/
 .text-center {
     text-align: center;
 }
@@ -596,9 +574,7 @@ input[type="checkbox"]:checked + .pixel-checkbox::after {
     display: none !important;
 }
 
-/* ============================================
-   LOADER (Compartido)
-   ============================================ */
+/*LOADER (Compartido)*/
 .loader {
     position: fixed;
     top: 0;
