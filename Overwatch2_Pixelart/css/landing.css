@@ -1,6 +1,4 @@
-/* ============================================
-   ESTILOS ESPECÍFICOS LANDING PAGE
-   ============================================ */
+/* ESTILOS ESPECÍFICOS LANDING PAGE */
 
 /* Hero Section */
 .hero-section {
@@ -136,7 +134,7 @@
 .pixel-hero {
     width: 100%;
     height: 100%;
-    background-image: url('../images/heroes/tracer-pixel.png');
+    background-image: url('media/images/heroes/tracer-pixel.png');
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
