@@ -1,6 +1,4 @@
-/* ============================================
-   MEDIA QUERIES RESPONSIVE
-   ============================================ */
+/* MEDIA QUERIES RESPONSIVE*/
 
 /* Tablet (768px - 1024px) */
 @media (max-width: 1024px) {
@@ -554,22 +552,5 @@
     .hud-controls-panel {
         width: 100%;
         margin-bottom: 2rem;
-    }
-}
-
-/* Ajustes para reducir movimiento (accesibilidad) */
-@media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-    }
-    
-    .btn-primary::before,
-    .feature::before,
-    .demo-nav-btn::before {
-        display: none;
     }
 }
